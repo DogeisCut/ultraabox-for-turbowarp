@@ -22,7 +22,7 @@
     <meta name="msapplication-TileColor" content="#dba600" />
     <meta name="msapplication-config" content="/browserconfig.xml" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icon_32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icon_32.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link href="https://fonts.googleapis.com/css?family=B612" rel="stylesheet" media="none" onload="if (this.media != 'all') this.media='all';" /> <!-- this is a trick to load CSS asynchronously. -->
@@ -71,6 +71,7 @@
             margin-top: 0.5em;
             margin-bottom: 0.5em;
             -webkit-text-stroke-width: 0;
+            color: var(--mod-title, var(--link-accent, #9c64f7));
         }
 
         h2 {
@@ -145,14 +146,6 @@
         }
     </style>
 </head>
-		<!--<script test="beepbox_editor.js" src="samples.js"></script>-->
-<!--<script test="beepbox_editor.js" src="samples2.js"></script>-->
-	<!--<script test="beepbox_editor.js" src="standarddrumsamples.js"></script>-->
- <!--<script test="beepbox_editor.js" src="drumsamples.js"></script>-->
-<!--<script test="beepbox_editor.js" src="samples3.js"></script>-->
-<!--<script test="beepbox_editor.js" src="plok_samples.js"></script>-->
-<!--<script test="beepbox_editor.js" src="kirby_samples.js"></script>-->
-<!--<script test="beepbox_editor.js" src="wario_samples.js"></script>-->
 	 <!--WIP, DO NOT USE-->
 	 <!--<center>THIS URL IS MEANT FOR TESTING THE CHANGES MADE IN ULTRABOX 2.0. THIS URL WILL BE DELETED WHEN ULTRABOX 2.0 RELEASES, AND ANY SONGS YOU MAKE HERE MAY BE UNRECOVERABLE. YOU'VE BEEN WARNED.</center>-->
 <body id="secondImage">
@@ -174,17 +167,19 @@
         <section>
 
             <h1>
-                <font color="#9c64f7">UltraBox</font>
+                <font>UltraBox</font>
                 <span id="goldboxPlant" style="display: inline; color:#62a13b"></span>
+                <!-- <span id="goldboxPlant" style="display: inline; color: var(--plant-color, var(--link-accent, #62a13b));"></span> -->
             </h1>
             
             <p id="introduction">
-                UltraBox is a mod made by Neptendo and Main Character of the Problem, with help from contributing community members.<br>
+                UltraBox is a mod first envisioned by Neptendo, that was made possible by Main, LeoV, and other contributing community members.<br>
                 It takes elements from most of the beepbox mods available (see <a href="./credits.html">credits</a>) and puts them in one convenient package.
             </p>
-            <p>
-                 <!--(Everything below is, more or less, the usual beepbox description)-->
-            </p>
+            <!--<p>
+                If you're familiar with BeepBox/JummBox and just want to learn what UltraBox does differently, check out this <a href="">overview video</a>.
+                You can also find the latest patch notes <a href="./patch_notes.html">here</a>.
+            </p>-->
             <p>
                 All song data is contained in the URL at the top of your browser.
                 When you make changes to the song, the URL is updated to reflect your changes.
@@ -255,14 +250,20 @@
 							<li><b>Ctrl + Arrows</b>: rearrange channels</li>
 							<li><b>[ ]</b>: move playhead backward or forward</li>
 							<li><b>F/H</b>: move to First or Highlighted pattern </li>
-							<li><b>Shift & Drag</b>: select part of a pattern (long press on touch screen)</li>
+							<li><b>Shift & Drag</b>: select part of a pattern</li>
 							<li>These are just a few shortcuts, check UltraBox's edit menu for more!</li>
+                            <!-- need to edit this eventually -->
                         </ul>
                     </div>
                     <p>
                         In the note pattern editor, you can click and drag horizontally on a note to adjust its duration.
                         You can also click above or below an existing note to add more notes to be played simultaneously, which is called a chord.
                     </p>
+                    <div id="mobile-instructions" style="display: none;">
+						<p>
+							You can also long-press in the pattern editor to select a time range within a pattern, which you can then drag to move multiple notes at once.<br/>
+						</p>
+					</div>
                     <p>
                         ADVANCED: Drag vertically from an existing note to bend its pitch, or drag vertically from above or below the note to adjust its volume. You can perform fine volume adjustment if you hold Control while doing this!
                     </p>
@@ -274,12 +275,14 @@
                         UltraBox has many more features.
                         Try playing with the buttons and menus on the right side to find out what it can do!
                         You can also click on the label next to each option for a description of what it does.
+                        Some features are hard to find anywhere though - for example, if your song has any modulator channels, you can hold Ctrl or Shift while the song is playing to record the movement of sliders directly! If you want to learn more tips, tricks, and best practices though, see below.
                     </p>
                     <p>
                         <!-- <a href="https://twitter.com/beepboxco" target="_blank">Check out some of these songs that other people have posted on Twitter!</a> -->
                         <!-- If you find something you like, you should let the creator know! -->
                         <!-- And if you see any beginners asking for advice, maybe you can help them! -->
 						Want to see what people have made with BeepBox? Songs that were shared on Twitter prior to 2023-05-22 can now be browsed in <a href="https://twitter-archive.beepbox.co/" target="_blank">this interactive archive</a>!
+                        Additionally, there's an active <a href="https://discord.gg/beepbox">BeepBox Discord</a> who you can share songs with and ask questions!
                     </p>
                 </section>
                 <section>
@@ -287,18 +290,13 @@
                         About
                     </h2>
                     <p>
-                        UltraBox is a fork of Goldbox developed by Neptendo and Main. See the credits list of mods we borrowed content from <a href="./credits.html" target="_blank">here</a>.
-                       JummBox is developed by Jummbus. You can find him sporadically at <a href="https://twitter.com/jummbus" target="_blank">twitter.com/jummbus</a>.<br><br>
-			    BeepBox was originally developed by <a href="http://www.johnnesky.com" target="_blank">John Nesky</a>, also known as <a href="https://twitter.com/shaktool" target="_blank">@shaktool</a>.
+                        UltraBox is a mod of BeepBox developed by Main and Neptendo. The easiest way to contact the developers is via the <a href="https://discord.com/invite/beepbox" target="_blank">Beepbox Discord</a>.<br><br>
                     </p>
-					<p>
-						The patch notes of Ultrabox are available <a href="./patch_notes.html">here</a>.
-					</p>
                     <p>
                         UltraBox does not claim ownership over songs created with it, so original songs belong to their authors.
                     </p>
                     <p>
-                        Neither Ultrabox nor it's creators assume responsibility for any copyrighted material played on UltraBox. No songs are ever received, recorded, or distributed by UltraBox's servers. All song data is contained in the URL after the hash (#) mark, and Ultrabox running inside your browser converts that data into sound waves.
+                        Neither Ultrabox nor its creators assume responsibility for any copyrighted material played on UltraBox. No songs are ever received, recorded, or distributed by UltraBox's servers. All song data is contained in the URL after the hash (#) mark, and Ultrabox running inside your browser converts that data into sound waves.
                     </p>
                     <p>
                         UltraBox does not collect, track, or share any user data.
@@ -312,17 +310,11 @@
                         You can download and use <a href="https://github.com/ultraabox/ultrabox_typescript" target="_blank">the source code</a> under the MIT license.
                         The original BeepBox source code by John Nesky can be found <a href="https://github.com/johnnesky/beepbox" target="_blank">here</a>.
                     </p>
+                    <p>
+                        The patch notes of Ultrabox are available <a href="./patch_notes.html">here</a>.
+                    </p>     
                 </section>
             </main>
-            <!-- <aside class="twitter-column"> -->
-                <!-- <h2> -->
-                    <!-- Twitter Archive: -->
-                <!-- </h2> -->
-                <!-- <div style="background: black;"> -->
-                    <!-- <a class="twitter-timeline" data-width="300" data-height="2000" data-link-color="#9988ff" data-chrome="noheader nofooter transparent" data-dnt="true" data-theme="dark" href="https://twitter-archive.beepbox.co/" target="_blank">Songs retweeted by @beepboxco</a> -->
-                    <!-- <script async src="https://twitter-archive.beepbox.co/" charset="utf-8"></script> -->
-                <!-- </div> -->
-            <!-- </aside> -->
         </div>
     </div>
 
@@ -333,9 +325,11 @@
     <script type="text/javascript">
 
         // Randomize display of header
-        // 1-in-19 (hopefully 20 soon?)
+        // 1-in-23
+        //I should rework this sometime (maybe add the midbox tips thingy?)
         if (Math.floor(Math.random() * 8) == 0) {
-            switch (Math.floor(Math.random() * 18)) {
+            switch (Math.floor(Math.random() * 22)) {
+                // jummbox/goldbox plants
                 case 0:
                     document.getElementById("goldboxPlant").innerHTML = "  🍂";
                     break;
@@ -360,7 +354,7 @@
                 case 7:
                     document.getElementById("goldboxPlant").innerHTML = "  1️⃣3️⃣1️⃣2️⃣";
                     break;
-                    // jummbox/goldbox plants 
+                // blubox plants 
 			    case 8:
                     document.getElementById("goldboxPlant").innerHTML = "  ≽(◕ ᴗ ◕)≼";
                     break;
@@ -373,25 +367,25 @@
 			    case 11:
                     document.getElementById("goldboxPlant").innerHTML = "  ≽(ᵕ ‿ ᵕ)≼";
                     break;
-                // blubox 1.0 plants 
+                // familiarbox plant (there were others, but the code of familiarbox is long gone) 
+                // this is actually a reference to really old lore chippy made for one of their projects 
 			    case 12:
                     document.getElementById("goldboxPlant").innerHTML = "  ☀️⭐🕒👁️";
                     break;
-                // familiarbox plant (there were others, but the code of familiarbox is long gone) 
-                // this is actually a reference to really old lore chippy made for one of their projects 
+                // suggested by mel, meant to supplement the lack of a worm logo 
+                // (in case it doesn't show up, this is meant to be a worm emoji)
 			    case 13:
                     document.getElementById("goldboxPlant").innerHTML = "  🪱";
                     break;
-                // suggested by mel(?), meant to supplement the lack of a worm logo 
-			     case 14:
+                // don't remember where this one is from, most likely it's from ultrabox or familiarbox
+                case 14:
                     document.getElementById("goldboxPlant").innerHTML = "  :wackybox:";
                     break;
-                // don't remember where this one is from, most likely it's unique to ultrabox 
+                // plant suggested by mel, in reference to the "(don't eat) thegubbys" meme
 			    case 15:
-                    document.getElementById("goldboxPlant").innerHTML = "  🚫 🍽️ 🐟";
+                    document.getElementById("goldboxPlant").innerHTML = "  🐟";
                     break;
-                 // plant suggested by mel, in reference to the "(don't) eat thegubbys" meme
-                 // I wonder if somebody will misinterpret this as a political statement
+                 // blubox desktop plants 
                  case 16:
                     document.getElementById("goldboxPlant").innerHTML = "  ⚡";
                     break;
@@ -404,13 +398,26 @@
                 case 19:
                     document.getElementById("goldboxPlant").innerHTML = "  👽";
                     break;
-                  // blubox 2.0 plants 
+                // dogebox2 plants 
+                case 20:
+                    document.getElementById("goldboxPlant").innerHTML = "  🍕";
+                    break;
+                case 21:
+                    document.getElementById("goldboxPlant").innerHTML = "  🌭";
+                    break;
+                case 22:
+                    document.getElementById("goldboxPlant").innerHTML = "  🍔";
+                    break;
+                case 23:
+                    document.getElementById("goldboxPlant").innerHTML = "  🍟";
+                    break;
             }
         }
 
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|android|ipad|playbook|silk/i.test(navigator.userAgent)) {
             document.getElementById("introduction").innerHTML = "UltraBox is an online tool for sketching and sharing chiptune melodies. Make sure that your volume is turned up, then press the play button!";
             document.getElementById("keyboard-instructions").style.display = "none";
+            document.getElementById("mobile-instructions").style.display = "";
             document.getElementById("bar-editing").innerHTML = "Tap the boxes to move to a different part of the song, or tap on the currently selected box to swap which pattern is played during that part of the song.";
 			//document.getElementById("offline-instructions").innerHTML = 'You can use BeepBox when your device is offline if you put a shortcut to BeepBox on your home screen. <ul><li>Chrome: find the "Add to Home Screen" option in the ⋮ menu.</li><li>Firefox: find the "Add Page Shortcut" option in the ⋮ menu.</li><li>Safari: find the "Add to Home Screen" option in the bookmark menu.</li></ul>';
         }

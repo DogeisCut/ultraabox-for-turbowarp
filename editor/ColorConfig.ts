@@ -13,7 +13,7 @@ export interface ChannelColors extends BeepBoxOption {
 
 export class ColorConfig {
     public static colorLookup: Map<number, ChannelColors> = new Map<number, ChannelColors>();
-
+	public static usesColorFormula: boolean = false;
     public static readonly themes: { [name: string]: string } = {
       "dark classic": `
 			:root {
@@ -227,6 +227,7 @@ export class ColorConfig {
 					--noise4-secondary-channel: #6B3E8E;
 					--noise4-primary-channel:   #AF82D2;
 					--noise4-secondary-note:    #9E71C1;
+					--noise4-primary-note:      #D4C1EA;
 					--noise5-secondary-channel: #607837;
 					--noise5-primary-channel:   #A2BB77;
 					--noise5-secondary-note:    #91AA66;
@@ -425,25 +426,25 @@ export class ColorConfig {
 					--mod-label-secondary-text: rgb(87, 86, 120);
 					--mod-label-primary-text: white;
 					--pitch-secondary-channel-hue: 0;
-					--pitch-secondary-channel-hue-scale: 6.1;
+					--pitch-secondary-channel-hue-scale: 6.5;
 					--pitch-secondary-channel-sat: 83.3;
 					--pitch-secondary-channel-sat-scale: 0.1;
 					--pitch-secondary-channel-lum: 40;
 					--pitch-secondary-channel-lum-scale: 0.05;
 					--pitch-primary-channel-hue: 0;
-					--pitch-primary-channel-hue-scale: 6.1;
+					--pitch-primary-channel-hue-scale: 6.5;
 					--pitch-primary-channel-sat: 100;
 					--pitch-primary-channel-sat-scale: 0.1;
 					--pitch-primary-channel-lum: 67.5;
 					--pitch-primary-channel-lum-scale: 0.05;
 					--pitch-secondary-note-hue: 0;
-					--pitch-secondary-note-hue-scale: 6.1;
+					--pitch-secondary-note-hue-scale: 6.5;
 					--pitch-secondary-note-sat: 93.9;
 					--pitch-secondary-note-sat-scale: 0.1;
 					--pitch-secondary-note-lum: 25;
 					--pitch-secondary-note-lum-scale: 0.05;
 					--pitch-primary-note-hue: 0;
-					--pitch-primary-note-hue-scale: 6.1;
+					--pitch-primary-note-hue-scale: 6.5;
 					--pitch-primary-note-sat: 100;
 					--pitch-primary-note-sat-scale: 0.05;
 					--pitch-primary-note-lum: 85.6;
@@ -2770,6 +2771,8 @@ export class ColorConfig {
 			--fifth-note: #41240c;
 			--white-piano-key: #e1c5b7;
 			--black-piano-key: #482c1e;
+			--white-piano-key-text: black;
+			--black-piano-key-text: white;
 			--use-color-formula: false;
 			--track-editor-bg-pitch: #4d2a19;
 			--track-editor-bg-pitch-dim: #27150c;
@@ -2867,7 +2870,8 @@ export class ColorConfig {
 			--disabled-note-primary: #bababa;
 			--disabled-note-secondary: #878787;
 		}`,
-        "mono": `:root {
+        "poly":
+			`:root {
 			--page-margin: #000;
 			--editor-background: #000;
 			--hover-preview: #808080;
@@ -2904,81 +2908,198 @@ export class ColorConfig {
 			--mod-label-primary: #232323;
 			--mod-label-secondary-text: #696969;
 			--mod-label-primary-text: #cdcdcd;
-			--pitch-secondary-channel-hue: 0;
-			--pitch-secondary-channel-hue-scale: 25;
-			--pitch-secondary-channel-sat: 10;
-			--pitch-secondary-channel-sat-scale: 0.1;
-			--pitch-secondary-channel-lum: 70;
+			--pitch-secondary-channel-hue: 208;
+			--pitch-secondary-channel-hue-scale: 10;
+			--pitch-secondary-channel-sat: 100;
+			--pitch-secondary-channel-sat-scale: 0;
+			--pitch-secondary-channel-lum: 88;
 			--pitch-secondary-channel-lum-scale: 0;
-			--pitch-primary-channel-hue: 0;
-			--pitch-primary-channel-hue-scale: 25;
-			--pitch-primary-channel-sat: 50;
-			--pitch-primary-channel-sat-scale: 0.1;
-			--pitch-primary-channel-lum: 95;
+			--pitch-primary-channel-hue: 207;
+			--pitch-primary-channel-hue-scale: 10;
+			--pitch-primary-channel-sat: 100;
+			--pitch-primary-channel-sat-scale: 0;
+			--pitch-primary-channel-lum: 910;
 			--pitch-primary-channel-lum-scale: 0;
-			--pitch-secondary-note-hue: 0;
-			--pitch-secondary-note-hue-scale: 25;
-			--pitch-secondary-note-sat: 10;
-			--pitch-secondary-note-sat-scale: 0.1;
-			--pitch-secondary-note-lum: 70;
+			--pitch-secondary-note-hue: 208;
+			--pitch-secondary-note-hue-scale: 10;
+			--pitch-secondary-note-sat: 100;
+			--pitch-secondary-note-sat-scale: 0;
+			--pitch-secondary-note-lum: 88;
 			--pitch-secondary-note-lum-scale: 0;
-			--pitch-primary-note-hue: 0;
-			--pitch-primary-note-hue-scale: 25;
-			--pitch-primary-note-sat: 50;
-			--pitch-primary-note-sat-scale: 0.1;
-			--pitch-primary-note-lum: 95;
+			--pitch-primary-note-hue: 208;
+			--pitch-primary-note-hue-scale: 10;
+			--pitch-primary-note-sat: 100;
+			--pitch-primary-note-sat-scale: 0;
+			--pitch-primary-note-lum: 910;
 			--pitch-primary-note-lum-scale: 0;
-			--noise-secondary-channel-hue: 125;
-			--noise-secondary-channel-hue-scale: 50;
-			--noise-secondary-channel-sat: 10;
-			--noise-secondary-channel-sat-scale: 0.1;
-			--noise-secondary-channel-lum: 70;
+			--noise-secondary-channel-hue: 328;
+			--noise-secondary-channel-hue-scale: 10;
+			--noise-secondary-channel-sat: 100;
+			--noise-secondary-channel-sat-scale: 0;
+			--noise-secondary-channel-lum: 88;
 			--noise-secondary-channel-lum-scale: 0;
-			--noise-primary-channel-hue: 125;
-			--noise-primary-channel-hue-scale: 50;
-			--noise-primary-channel-sat: 50;
-			--noise-primary-channel-sat-scale: 0.1;
-			--noise-primary-channel-lum: 95;
+			--noise-primary-channel-hue: 327;
+			--noise-primary-channel-hue-scale: 10;
+			--noise-primary-channel-sat: 100;
+			--noise-primary-channel-sat-scale: 0;
+			--noise-primary-channel-lum: 910;
 			--noise-primary-channel-lum-scale: 0;
-			--noise-secondary-note-hue: 125;
-			--noise-secondary-note-hue-scale: 50;
-			--noise-secondary-note-sat: 10;
-			--noise-secondary-note-sat-scale: 0.1;
-			--noise-secondary-note-lum: 70;
+			--noise-secondary-note-hue: 328;
+			--noise-secondary-note-hue-scale: 10;
+			--noise-secondary-note-sat: 100;
+			--noise-secondary-note-sat-scale: 0;
+			--noise-secondary-note-lum: 88;
 			--noise-secondary-note-lum-scale: 0;
-			--noise-primary-note-hue: 125;
-			--noise-primary-note-hue-scale: 50;
-			--noise-primary-note-sat: 50;
-			--noise-primary-note-sat-scale: 0.1;
-			--noise-primary-note-lum: 95;
+			--noise-primary-note-hue: 327;
+			--noise-primary-note-hue-scale: 10;
+			--noise-primary-note-sat: 100;
+			--noise-primary-note-sat-scale: 0;
+			--noise-primary-note-lum: 910;
 			--noise-primary-note-lum-scale: 0;
-			--mod-secondary-channel-hue: 255;
-			--mod-secondary-channel-hue-scale: 75;
-			--mod-secondary-channel-sat: 10;
+			--mod-secondary-channel-hue: 87;
+			--mod-secondary-channel-hue-scale: 10;
+			--mod-secondary-channel-sat: 100;
 			--mod-secondary-channel-sat-scale: 0;
-			--mod-secondary-channel-lum: 70;
+			--mod-secondary-channel-lum: 88;
 			--mod-secondary-channel-lum-scale: 0;
-			--mod-primary-channel-hue: 255;
-			--mod-primary-channel-hue-scale: 75;
-			--mod-primary-channel-sat: 50;
+			--mod-primary-channel-hue: 88;
+			--mod-primary-channel-hue-scale: 10;
+			--mod-primary-channel-sat: 100;
 			--mod-primary-channel-sat-scale: 0;
-			--mod-primary-channel-lum: 95;
+			--mod-primary-channel-lum: 910;
 			--mod-primary-channel-lum-scale: 0;
-			--mod-secondary-note-hue: 255;
-			--mod-secondary-note-hue-scale: 75;
-			--mod-secondary-note-sat: 10;
+			--mod-secondary-note-hue: 87;
+			--mod-secondary-note-hue-scale: 10;
+			--mod-secondary-note-sat: 100;
 			--mod-secondary-note-sat-scale: 0;
-			--mod-secondary-note-lum: 70;
+			--mod-secondary-note-lum: 88;
 			--mod-secondary-note-lum-scale: 0;
-			--mod-primary-note-hue: 255;
-			--mod-primary-note-hue-scale: 75;
-			--mod-primary-note-sat: 50;
+			--mod-primary-note-hue: 88;
+			--mod-primary-note-hue-scale: 10;
+			--mod-primary-note-sat: 100;
 			--mod-primary-note-sat-scale: 0;
-			--mod-primary-note-lum: 95;
+			--mod-primary-note-lum: 910;
 			--mod-primary-note-lum-scale: 0;
 			--disabled-note-primary: #c6c6c6;
 			--disabled-note-secondary: #8c8c8c;
 		}`,
+		"blutonium":
+			`:root {
+			--page-margin: #02070D;
+			--editor-background: #02070D;
+			--hover-preview: white;
+			--playhead: white;
+			--primary-text: #9bd1ee;
+			--secondary-text: #5a6da8;
+			--inverted-text: black;
+			--text-selection: rgb(68 68 255 / 99%);
+			--box-selection-fill: rgb(0 0 255 / 30%);
+			--loop-accent: #024aca;
+			--link-accent: #024aca;
+			--ui-widget-background: #161c2e;
+			--ui-widget-focus: #262c3e;
+			--pitch-background: #22272D;
+			--tonic: #1b3056;
+			--fifth-note: #344051;
+			--white-piano-key: #a6c6ed;
+			--black-piano-key: #2f4687;
+			--use-color-formula: false;
+			--track-editor-bg-pitch: #25284c;
+			--track-editor-bg-pitch-dim: #211c26;
+			--track-editor-bg-noise: #261f42;
+			--track-editor-bg-noise-dim: #1a152d;
+			--track-editor-bg-mod: #183049;
+			--track-editor-bg-mod-dim: #102132;
+			--multiplicative-mod-slider: #344a7f;
+			--overwriting-mod-slider: #344a7f;
+			--indicator-primary: #024aca;
+			--indicator-secondary: #00177d;
+			--select2-opt-group: #141e34;
+			--input-box-outline: #141e34;
+			--mute-button-normal: #273b9d;
+			--mute-button-mod: #27989d;
+			--pitch1-secondary-channel: hsl(200, 100%, 40%);
+			--pitch1-primary-channel: #99ddff;
+			--pitch1-secondary-note: hsl(200, 100%, 40%);
+			--pitch1-primary-note: #99ddff;
+			--pitch2-secondary-channel: 	hsl(212, 100%, 34%);
+			--pitch2-primary-channel: #5BA8FF;
+			--pitch2-secondary-note: hsl(212, 100%, 34%);
+			--pitch2-primary-note: #5BA8FF;
+			--pitch3-secondary-channel: #024ACA;
+			--pitch3-primary-channel: #0A89FF;
+			--pitch3-secondary-note: #024ACA;
+			--pitch3-primary-note: #0A89FF;
+			--pitch4-secondary-channel: #00177D;
+			--pitch4-primary-channel: #024ACA;
+			--pitch4-secondary-note: #00177D;
+			--pitch4-primary-note: #024ACA;
+			--pitch5-secondary-channel: #000e4e;
+			--pitch5-primary-channel: #0023bf;
+			--pitch5-secondary-note: #000e4e;
+			--pitch5-primary-note: #0023bf;
+			--pitch6-secondary-channel: #8990FE;
+			--pitch6-primary-channel: #C2C6FF;
+			--pitch6-secondary-note: #8990FE;
+			--pitch6-primary-note: #C2C6FF;
+			--pitch7-secondary-channel: #5E65D3;
+			--pitch7-primary-channel: #8990FE;
+			--pitch7-secondary-note: #5E65D3;
+			--pitch7-primary-note: #8990FE;
+			--pitch8-secondary-channel: #3138A6;
+			--pitch8-primary-channel: #5E65D3;
+			--pitch8-secondary-note: #3138A6;
+			--pitch8-primary-note: #5E65D3;
+			--pitch9-secondary-channel: #1B0B7F;
+			--pitch9-primary-channel: #3138A6;
+			--pitch9-secondary-note: #1B0B7F;
+			--pitch9-primary-note: #3138A6;
+			--pitch10-secondary-channel: #13015D;
+			--pitch10-primary-channel: #1c02bd;
+			--pitch10-secondary-note: #13015D;
+			--pitch10-primary-note: #1c02bd;
+			--noise1-secondary-channel: #A675FE;
+			--noise1-primary-channel: #E2C9FF;
+			--noise1-secondary-note: #A675FE;
+			--noise1-primary-note: #E2C9FF;
+			--noise2-secondary-channel: #6A31CA;
+			--noise2-primary-channel: #A675FE;
+			--noise2-secondary-note: #6A31CA;
+			--noise2-primary-note: #A675FE;
+			--noise3-secondary-channel: #5A1991;
+			--noise3-primary-channel: #6A31CA;
+			--noise3-secondary-note: #5A1991;
+			--noise3-primary-note: #6A31CA;
+			--noise4-secondary-channel: #2f1a68;
+			--noise4-primary-channel: #5A1991;
+			--noise4-secondary-note: #2f1a68;
+			--noise4-primary-note: #5A1991;
+			--noise5-secondary-channel: #211640;
+			--noise5-primary-channel: #391b8d;
+			--noise5-secondary-note: #211640;
+			--noise5-primary-note: #391b8d;
+			--mod1-secondary-channel: #25E2CD;
+			--mod1-primary-channel: #BDFFCA;
+			--mod1-secondary-note: #25E2CD;
+			--mod1-primary-note: #BDFFCA;
+			--mod2-secondary-channel: #0A98AC;
+			--mod2-primary-channel: #25E2CD;
+			--mod2-secondary-note: #0A98AC;
+			--mod2-primary-note: #25E2CC;
+			--mod3-secondary-channel: #005280;
+			--mod3-primary-channel: #0A98AC;
+			--mod3-secondary-note: #005280;
+			--mod3-primary-note: #0A98AC;
+			--mod4-secondary-channel: #0f3670;
+			--mod4-primary-channel: #1369c1;
+			--mod4-secondary-note: #0f3670;
+			--mod4-primary-note: #1369c1;
+			--mod-label-primary: #191d26;
+			--mod-label-secondary-text: #024aca;
+			--mod-label-primary-text: #ffffffa6;
+			--disabled-note-primary: #c9c9c9;
+			--disabled-note-secondary: #616161;
+	}`,
 		"modbox classic": `
 			:root {
 				--page-margin: black;
@@ -3016,6 +3137,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 4;
 				--pitch1-secondary-channel: #0099a1;
 				--pitch1-primary-channel:   #25f3ff;
 				--pitch1-secondary-note:    #0099a1;
@@ -3097,6 +3220,7 @@ export class ColorConfig {
 					--mod-label-primary-text:   black;
 					--disabled-note-primary:    #999;
 					--disabled-note-secondary:  #666;
+					--text-disabled-icon: ✗ ;
 				}
 			`,
 			"zefbox": `
@@ -3256,6 +3380,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 4;
 				--pitch1-secondary-channel: #539999;
 				--pitch1-primary-channel:   #5EB1B1;
 				--pitch1-secondary-note:    #539999;
@@ -3376,6 +3502,7 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--noise-channel-limit: 2;
 				--pitch1-secondary-channel: #00ffff;
 				--pitch1-primary-channel:   #00ffff;
 				--pitch1-secondary-note:    #00ffff;
@@ -3497,6 +3624,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 3;
+					--noise-channel-limit: 1;
 				--pitch1-secondary-channel: #bda822;
 				--pitch1-primary-channel:   #fcdb00;
 				--pitch1-secondary-note:    #bda822;
@@ -3618,6 +3747,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 3;
 				--pitch1-secondary-channel: #7e4a35;
 					--pitch1-primary-channel:   #c27251;
 					--pitch1-secondary-note:    #7e4a35;
@@ -3740,6 +3871,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 3;
 				--pitch1-secondary-channel: #0099A1;
 				--pitch1-primary-channel:   #25F3FF;
 				--pitch1-secondary-note:    #00BDC7;
@@ -3861,6 +3994,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 9;
+					--noise-channel-limit: 3;
 				--pitch1-secondary-channel: #139620;
 				--pitch1-primary-channel:   #25ff3a;
 				--pitch1-secondary-note:    #139620;
@@ -3889,18 +4024,18 @@ export class ColorConfig {
 				--pitch7-primary-channel:   #ffa216;
 				--pitch7-secondary-note:    #ad6e0f;
 				--pitch7-primary-note:      #ffa216;
-				--pitch8-secondary-channel: #a7b512;
-				--pitch8-primary-channel:   #ebff19;
-				--pitch8-secondary-note:    #a7b512;
-				--pitch8-primary-note:      #ebff19;
-				--pitch9-secondary-channel: #70ad1b;
-				--pitch9-primary-channel:   #a4ff26;
-				--pitch9-secondary-note:    #70ad1b;
-				--pitch9-primary-note:      #a4ff26;
-				--pitch10-secondary-channel:#5D9620;
-				--pitch10-primary-channel:  #5DBE20;
-				--pitch10-secondary-note:   #5D9620;
-				--pitch10-primary-note:     #5DBE20;
+				--pitch8-secondary-channel: #ad6e0f;
+				--pitch8-primary-channel:   #ffa216;
+				--pitch8-secondary-note:    #ad6e0f;
+				--pitch8-primary-note:      #ffa216;
+				--pitch9-secondary-channel: #a7b512;
+				--pitch9-primary-channel:   #ebff19;
+				--pitch9-secondary-note:    #a7b512;
+				--pitch9-primary-note:      #ebff19;
+				--pitch10-secondary-channel:#70ad1b;
+				--pitch10-primary-channel:  #a4ff26;
+				--pitch10-secondary-note:   #70ad1b;
+				--pitch10-primary-note:     #a4ff26;
 				--noise1-secondary-channel: #68706f;
 				--noise1-primary-channel:   #a6b2b1;
 				--noise1-secondary-note:    #68706f;
@@ -3942,6 +4077,91 @@ export class ColorConfig {
 					--mod-label-primary-text:   black;
 					--disabled-note-primary:    #999;
 					--disabled-note-secondary:  #666;
+				}
+			`,
+			"nepbox": `
+			:root {
+				--page-margin: #000;
+				--editor-background: #060606;
+				--hover-preview: #fff;
+				--playhead: rgb(0, 242, 255);
+				--primary-text: #00fff5;
+				--secondary-text: #a82f2f;
+				--inverted-text: #000;
+				--text-selection: rgba(98, 46, 164, .99);
+				--box-selection-fill: #b74a4a;
+				--loop-accent: #7744FF;
+				--link-accent: #ff00e1;
+				--ui-widget-background: #484848;
+				--ui-widget-focus: #3e3e3e;
+				--pitch-background: #0a2d44;
+				--tonic: #9150ff;
+				--fifth-note: #900;
+				--white-piano-key: #353535;
+				--black-piano-key: #fff;
+				--white-piano-key-text: #fff;
+				--black-piano-key-text: #000;
+				--use-color-formula: false;
+				--track-editor-bg-pitch: #424242;
+				--track-editor-bg-pitch-dim: #000;
+				--track-editor-bg-noise: #424242;
+				--track-editor-bg-noise-dim: #000;
+				--track-editor-bg-mod: #3c3c3c;
+				--track-editor-bg-mod-dim: #000;
+				--multiplicative-mod-slider: #fff;
+				--overwriting-mod-slider: #9d9d9d;
+				--indicator-primary: #f00;
+				--indicator-secondary: #919191;
+				--select2-opt-group: #5d576f;
+				--input-box-outline: #626262;
+				--mute-button-normal: #9a00ff;
+				--mute-button-mod: #00fff7;
+				--mod-label-primary: #2b2b2b;
+				--pitch-channel-limit: 4;
+				--noise-channel-limit: 2;
+
+				--pitch1-secondary-channel: #c13cbf;
+				--pitch1-primary-channel: #f75dff;
+				--pitch1-secondary-note: #b930a2;
+				--pitch1-primary-note: #fca5ff;
+				--pitch2-secondary-channel: #800000;
+				--pitch2-primary-channel: #f00;
+				--pitch2-secondary-note: #8c2121;
+				--pitch2-primary-note: #ff5252;
+				--pitch3-secondary-channel: #004bb3;
+				--pitch3-primary-channel: #1792ff;
+				--pitch3-secondary-note: #005cb3;
+				--pitch3-primary-note: #00ffe9;
+				--pitch4-secondary-channel: #a48800;
+				--pitch4-primary-channel: #fb0;
+				--pitch4-secondary-note: #9c4100;
+				--pitch4-primary-note: #ffd84e;
+				--noise1-secondary-channel: #868686;
+				--noise1-primary-channel: #fff;
+				--noise1-secondary-note: #868686;
+				--noise1-primary-note: #fff;
+				--noise2-secondary-channel: #805300;
+				--noise2-primary-channel: #ff8c00;
+				--noise2-secondary-note: #6a3500;
+				--noise2-primary-note: #a85400;
+				--mod1-secondary-channel: #6c0000;
+				--mod1-primary-channel: #ff3e3e;
+				--mod1-secondary-note: #6c0000;
+				--mod1-primary-note: #ff3e3e;
+				--mod2-secondary-channel: #d25a00;
+				--mod2-primary-channel: #fdff00;
+				--mod2-secondary-note: #d25a00;
+				--mod2-primary-note: #fdff00;
+				--mod3-secondary-channel: #046000;
+				--mod3-primary-channel: #23ff1b;
+				--mod3-secondary-note: #046000;
+				--mod3-primary-note: #23ff1b;
+				--mod4-secondary-channel: #3b2bae;
+				--mod4-primary-channel: #0c79ff;
+				--mod4-secondary-note: #3b2bae;
+				--mod4-primary-note: #0c79ff;
+				--disabled-note-primary: #999;
+				--disabled-note-secondary: #696969;
 				}
 			`,
 			 "cardboardbox classic": `
@@ -4151,7 +4371,7 @@ export class ColorConfig {
 					--noise4-primary-channel:   #024ACA;
 					--noise4-secondary-note:    #0A89FF;
 					--noise4-primary-note:      #024ACA;
-		--mod1-secondary-channel:   #0A89FF;
+					--mod1-secondary-channel:   #0A89FF;
 					--mod1-primary-channel:     #024ACA;
 					--mod1-secondary-note:      #0A89FF;
 					--mod1-primary-note:        #024ACA;
@@ -4174,122 +4394,124 @@ export class ColorConfig {
 			`,
 		"dogebox classic": `
 				:root {
-					--page-margin: #0d0063;
---editor-background: #0D0063;
---hover-preview: white;
---playhead: white;
---primary-text: white;
---secondary-text: #999;
---inverted-text: black;
---text-selection: rgba(119,68,255,0.99);
---box-selection-fill: rgba(255,255,255,0.2);
---loop-accent: #74f;
---link-accent: #98f;
---ui-widget-background: #444;
---ui-widget-focus: #777;
---pitch-background: #322c59;
---tonic: #1c1933;
---fifth-note: #7b74ad;
---white-piano-key: #bbb;
---black-piano-key: #444;
-				--white-piano-key-text: #131200;
-				--black-piano-key-text: #fff;
-					--use-color-formula: false;
-					--track-editor-bg-pitch: #444;
-					--track-editor-bg-pitch-dim: #333;
-					--track-editor-bg-noise: #444;
-					--track-editor-bg-noise-dim: #333;
-					--track-editor-bg-mod: #234;
-					--track-editor-bg-mod-dim: #123;
-					--multiplicative-mod-slider: #456;
-					--overwriting-mod-slider: #654;
-					--indicator-primary: #74f;
-					--indicator-secondary: #444;
-					--select2-opt-group: #585858;
-					--input-box-outline: #333;
-					--mute-button-normal: #ffa033;
-					--mute-button-mod: #9a6bff;
---pitch1-secondary-channel: #c7ac00;
---pitch1-primary-channel: #fcf403;
---pitch1-secondary-note: #c7c700;
---pitch1-primary-note: #fcf403;
---pitch2-secondary-channel: #9400b5;
---pitch2-primary-channel: #ff00ee;
---pitch2-secondary-note: #9400b5;
---pitch2-primary-note: #ff00ee;
---pitch3-secondary-channel: #b37466;
---pitch3-primary-channel: #ffc6a1;
---pitch3-secondary-note: #b37466;
---pitch3-primary-note: #ffc6a1;
---pitch4-secondary-channel: #00a100;
---pitch4-primary-channel: #50ff50;
---pitch4-secondary-note: #00c700;
---pitch4-primary-note: #a0ffa0;
---pitch5-secondary-channel: #d020d0;
---pitch5-primary-channel: #ff90ff;
---pitch5-secondary-note: #e040e0;
---pitch5-primary-note: #ffc0ff;
---pitch6-secondary-channel: #7777b0;
---pitch6-primary-channel: #a0a0ff;
---pitch6-secondary-note: #8888d0;
---pitch6-primary-note: #d0d0ff;
---pitch7-secondary-channel: #c7ac00;
---pitch7-primary-channel: #fcf403;
---pitch7-secondary-note: #c7c700;
---pitch7-primary-note: #fcf403;
---pitch8-secondary-channel: #9400b5;
---pitch8-primary-channel: #ff00ee;
---pitch8-secondary-note: #9400b5;
---pitch8-primary-note: #ff00ee;
---pitch9-secondary-channel: #b37466;
---pitch9-primary-channel: #ffc6a1;
---pitch9-secondary-note: #b37466;
---pitch9-primary-note: #ffc6a1;
---pitch10-secondary-channel: #00a100;
---pitch10-primary-channel: #50ff50;
---pitch10-secondary-note: #00c700;
---pitch10-primary-note: #a0ffa0;
---noise1-secondary-channel: #95acad;
---noise1-primary-channel: #cee9eb;
---noise1-secondary-note: #95acad;
---noise1-primary-note: #cee9eb;
---noise2-secondary-channel: #996633;
---noise2-primary-channel: #ddaa77;
---noise2-secondary-note: #cc9966;
---noise2-primary-note: #f0d0bb;
---noise3-secondary-channel: #4a6d8f;
---noise3-primary-channel: #77aadd;
---noise3-secondary-note: #6f9fcf;
---noise3-primary-note: #bbd7ff;
---noise4-secondary-channel: #7c9b42;
-				--noise4-primary-channel:   #a5ff00;
-				--noise4-secondary-note:    #7c9b42;
-				--noise4-primary-note:      #a5ff00;
-				--noise5-secondary-channel: #7c9b42;
-				--noise5-primary-channel:   #A2BB77;
-				--noise5-secondary-note:    #91AA66;
-				--noise5-primary-note:      #C5E2B2;
-       --mod1-secondary-channel: #c7ac00;
---mod1-primary-channel: #fcf403;
---mod1-secondary-note: #c7c700;
---mod1-primary-note: #fcf403;
---mod2-secondary-channel: #9400b5;
---mod2-primary-channel: #ff00ee;
---mod2-secondary-note: #9400b5;
---mod2-primary-note: #ff00ee;
---mod3-secondary-channel: #b37466;
---mod3-primary-channel: #ffc6a1;
---mod3-secondary-note: #b37466;
---mod3-primary-note: #ffc6a1;
---mod4-secondary-channel: #00a100;
---mod4-primary-channel: #50ff50;
---mod4-secondary-note: #00c700;
---mod4-primary-note: #a0ffa0;
-					--mod-label-primary:        #999;
-					--mod-label-secondary-text: #333;
-					--mod-label-primary-text:   black;
-					--disabled-note-primary:    #999;
-					--disabled-note-secondary:  #666;
+			--page-margin: #0d0063;
+			--editor-background: #0D0063;
+			--hover-preview: white;
+			--playhead: white;
+			--primary-text: white;
+			--secondary-text: #999;
+			--inverted-text: black;
+			--text-selection: rgba(119,68,255,0.99);
+			--box-selection-fill: rgba(255,255,255,0.2);
+			--loop-accent: #74f;
+			--link-accent: #98f;
+			--ui-widget-background: #444;
+			--ui-widget-focus: #777;
+			--pitch-background: #322c59;
+			--tonic: #1c1933;
+			--fifth-note: #7b74ad;
+			--white-piano-key: #bbb;
+			--black-piano-key: #444;
+			--white-piano-key-text: #131200;
+			--black-piano-key-text: #fff;
+			--use-color-formula: false;
+			--track-editor-bg-pitch: #444;
+			--track-editor-bg-pitch-dim: #333;
+			--track-editor-bg-noise: #444;
+			--track-editor-bg-noise-dim: #333;
+			--track-editor-bg-mod: #234;
+			--track-editor-bg-mod-dim: #123;
+			--multiplicative-mod-slider: #456;
+			--overwriting-mod-slider: #654;
+			--indicator-primary: #74f;
+			--indicator-secondary: #444;
+			--select2-opt-group: #585858;
+			--input-box-outline: #333;
+			--mute-button-normal: #ffa033;
+			--mute-button-mod: #9a6bff;
+			--pitch-channel-limit: 6;
+			--noise-channel-limit: 3;
+			--pitch1-secondary-channel: #c7ac00;
+			--pitch1-primary-channel: #fcf403;
+			--pitch1-secondary-note: #c7c700;
+			--pitch1-primary-note: #fcf403;
+			--pitch2-secondary-channel: #9400b5;
+			--pitch2-primary-channel: #ff00ee;
+			--pitch2-secondary-note: #9400b5;
+			--pitch2-primary-note: #ff00ee;
+			--pitch3-secondary-channel: #b37466;
+			--pitch3-primary-channel: #ffc6a1;
+			--pitch3-secondary-note: #b37466;
+			--pitch3-primary-note: #ffc6a1;
+			--pitch4-secondary-channel: #00a100;
+			--pitch4-primary-channel: #50ff50;
+			--pitch4-secondary-note: #00c700;
+			--pitch4-primary-note: #a0ffa0;
+			--pitch5-secondary-channel: #d020d0;
+			--pitch5-primary-channel: #ff90ff;
+			--pitch5-secondary-note: #e040e0;
+			--pitch5-primary-note: #ffc0ff;
+			--pitch6-secondary-channel: #7777b0;
+			--pitch6-primary-channel: #a0a0ff;
+			--pitch6-secondary-note: #8888d0;
+			--pitch6-primary-note: #d0d0ff;
+			--pitch7-secondary-channel: #c7ac00;
+			--pitch7-primary-channel: #fcf403;
+			--pitch7-secondary-note: #c7c700;
+			--pitch7-primary-note: #fcf403;
+			--pitch8-secondary-channel: #9400b5;
+			--pitch8-primary-channel: #ff00ee;
+			--pitch8-secondary-note: #9400b5;
+			--pitch8-primary-note: #ff00ee;
+			--pitch9-secondary-channel: #b37466;
+			--pitch9-primary-channel: #ffc6a1;
+			--pitch9-secondary-note: #b37466;
+			--pitch9-primary-note: #ffc6a1;
+			--pitch10-secondary-channel: #00a100;
+			--pitch10-primary-channel: #50ff50;
+			--pitch10-secondary-note: #00c700;
+			--pitch10-primary-note: #a0ffa0;
+			--noise1-secondary-channel: #95acad;
+			--noise1-primary-channel: #cee9eb;
+			--noise1-secondary-note: #95acad;
+			--noise1-primary-note: #cee9eb;
+			--noise2-secondary-channel: #996633;
+			--noise2-primary-channel: #ddaa77;
+			--noise2-secondary-note: #cc9966;
+			--noise2-primary-note: #f0d0bb;
+			--noise3-secondary-channel: #4a6d8f;
+			--noise3-primary-channel: #77aadd;
+			--noise3-secondary-note: #6f9fcf;
+			--noise3-primary-note: #bbd7ff;
+			--noise4-secondary-channel: #7c9b42;
+			--noise4-primary-channel:   #a5ff00;
+			--noise4-secondary-note:    #7c9b42;
+			--noise4-primary-note:      #a5ff00;
+			--noise5-secondary-channel: #7c9b42;
+			--noise5-primary-channel:   #A2BB77;
+			--noise5-secondary-note:    #91AA66;
+			--noise5-primary-note:      #C5E2B2;
+      	 	--mod1-secondary-channel: #c7ac00;
+			--mod1-primary-channel: #fcf403;
+			--mod1-secondary-note: #c7c700;
+			--mod1-primary-note: #fcf403;
+			--mod2-secondary-channel: #9400b5;
+			--mod2-primary-channel: #ff00ee;
+			--mod2-secondary-note: #9400b5;
+			--mod2-primary-note: #ff00ee;
+			--mod3-secondary-channel: #b37466;
+			--mod3-primary-channel: #ffc6a1;
+			--mod3-secondary-note: #b37466;
+			--mod3-primary-note: #ffc6a1;
+			--mod4-secondary-channel: #00a100;
+			--mod4-primary-channel: #50ff50;
+			--mod4-secondary-note: #00c700;
+			--mod4-primary-note: #a0ffa0;
+			--mod-label-primary:        #999;
+			--mod-label-secondary-text: #333;
+			--mod-label-primary-text:   black;
+			--disabled-note-primary:    #999;
+			--disabled-note-secondary:  #666;
 				}
 			`,
 		  "dogebox dark": `
@@ -4370,6 +4592,25 @@ export class ColorConfig {
 					--fifth-note: #468;
 					--white-piano-key: #bbb;
 					--black-piano-key: #444;
+						--white-piano-key-text: #131200;
+						--black-piano-key-text: #fff;
+						--use-color-formula: false;
+						--track-editor-bg-pitch: #444;
+						--track-editor-bg-pitch-dim: #333;
+						--track-editor-bg-noise: #444;
+						--track-editor-bg-noise-dim: #333;
+						--track-editor-bg-mod: #234;
+						--track-editor-bg-mod-dim: #123;
+						--multiplicative-mod-slider: #456;
+						--overwriting-mod-slider: #654;
+						--indicator-primary: #74f;
+						--indicator-secondary: #444;
+						--select2-opt-group: #585858;
+						--input-box-outline: #333;
+						--mute-button-normal: #ffa033;
+						--mute-button-mod: #9a6bff;s
+						--pitch-channel-limit: 6;
+					--noise-channel-limit: 3;
 					--pitch1-secondary-channel: #0099a1;
 					--pitch1-primary-channel:   #25f3ff;
 					--pitch1-secondary-note:    #00bdc7;
@@ -4491,7 +4732,9 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
-				--pitch1-secondary-channel: #004444;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 3;
+					--pitch1-secondary-channel: #004444;
 					--pitch1-primary-channel:   #009999;
 					--pitch1-secondary-note:    #004444;
 					--pitch1-primary-note:      #009999;
@@ -4577,69 +4820,6 @@ export class ColorConfig {
 					box-shadow: inset 0 0 0 1px var(--secondary-text);
 				}
 			`,
-			   "todbox dark (original)": `
-				:root {
-					-webkit-text-stroke-width: 0.5px;
-					--page-margin: black;
-					--editor-background: black;
-					--hover-preview: #999999;
-					--playhead: #999999;
-					--primary-text: #999999;
-					--secondary-text: #444444;
-					--inverted-text: black;
-					--text-selection: #999999;
-					--box-selection-fill: #999999;
-					--loop-accent: #999999;
-					--link-accent: #999999;
-					--ui-widget-background: #222222;
-					--ui-widget-focus: #444444;
-					--pitch-background: #101010;
-					--tonic: #404040;
-					--fifth-note: #202020;
-					--white-piano-key: #999999;
-					--black-piano-key: #101010;
-					--pitch1-secondary-channel: #004444;
-					--pitch1-primary-channel:   #009999;
-					--pitch1-secondary-note:    #004444;
-					--pitch1-primary-note:      #009999;
-					--pitch2-secondary-channel: #444400;
-					--pitch2-primary-channel:   #999900;
-					--pitch2-secondary-note:    #444400;
-					--pitch2-primary-note:      #999900;
-					--pitch3-secondary-channel: #443300;
-					--pitch3-primary-channel:   #996600;
-					--pitch3-secondary-note:    #443300;
-					--pitch3-primary-note:      #996600;
-					--pitch4-secondary-channel: #004400;
-					--pitch4-primary-channel:   #009900;
-					--pitch4-secondary-note:    #004400;
-					--pitch4-primary-note:      #009900;
-					--pitch5-secondary-channel: #440044;
-					--pitch5-primary-channel:   #990099;
-					--pitch5-secondary-note:    #440044;
-					--pitch5-primary-note:      #990099;
-					--pitch6-secondary-channel: #333344;
-					--pitch6-primary-channel:   #666699;
-					--pitch6-secondary-note:    #333344;
-					--pitch6-primary-note:      #666699;
-					--noise1-secondary-channel: #444444;
-					--noise1-primary-channel:   #999999;
-					--noise1-secondary-note:    #444444;
-					--noise1-primary-note:      #999999;
-					--noise2-secondary-channel: #443311;
-					--noise2-primary-channel:   #996633;
-					--noise2-secondary-note:    #443311;
-					--noise2-primary-note:      #996633;
-					--noise3-secondary-channel: #113344;
-					--noise3-primary-channel:   #336699;
-					--noise3-secondary-note:    #113344;
-					--noise3-primary-note:      #336699;
-				}
-				
-				.beepboxEditor button, .beepboxEditor select {
-					box-shadow: inset 0 0 0 1px var(--secondary-text);
-				}
-			`,
 			"mainbox 1.0": `
 			:root {
 				--page-margin: black;
@@ -4652,14 +4832,14 @@ export class ColorConfig {
 				--text-selection: rgba(119,68,255,0.99);
 				--box-selection-fill: rgba(255,255,255,0.2);
 				--loop-accent: #2F1C40;
-					--link-accent: #543873;
+				--link-accent: #543873;
 				--ui-widget-background: #2F1C40;
-					--ui-widget-focus: #543873;
-					--pitch-background: #2F1C40;
-					--tonic: #42286D;
+				--ui-widget-focus: #543873;
+				--pitch-background: #2F1C40;
+				--tonic: #42286D;
 				--fifth-note: #37416B;
-			--white-piano-key: #156CB6;
-					--black-piano-key: #130D14;
+				--white-piano-key: #156CB6;
+				--black-piano-key: #130D14;
 				--white-piano-key-text: #131200;
 				--black-piano-key-text: #fff;
 					--use-color-formula: false;
@@ -4677,7 +4857,9 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
-				--pitch1-secondary-channel: #156C99;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 3;
+					--pitch1-secondary-channel: #156C99;
 					--pitch1-primary-channel:   #00CFDF;
 					--pitch1-secondary-note:    #0080A8;
 					--pitch1-primary-note:      #009FC6;
@@ -4759,126 +4941,6 @@ export class ColorConfig {
 					--disabled-note-primary:    #999;
 					--disabled-note-secondary:  #666;
 				}
-			`,
-			"mainbox reimagined": `
-					:root {
-		 --page-margin: black;
-		 --editor-background: black;
-		 --hover-preview: white;
-		 --playhead: white;
-		 --primary-text: white;
-		 --secondary-text: #B6B7C4;
-		 --inverted-text: black;
-		 --text-selection: rgba(119,68,255,0.99);
-		 --box-selection-fill: rgba(255,255,255,0.2);
-		 --loop-accent: #8153E0;
-		 --link-accent: #8153E0;
-		 --ui-widget-background: #2D1C4C;
-		 --ui-widget-focus: #432C89;
-		 --pitch-background: #2B1E38;
-		 --tonic: #462C77;
-		 --fifth-note: #38477F;
-		 --white-piano-key: #D2D2DD;
-		 --black-piano-key: #020202;
-		 --white-piano-key-text: #131200;
-		 --black-piano-key-text: #fff;
-		 --use-color-formula: false;
-		 --track-editor-bg-pitch: #444;
-		 --track-editor-bg-pitch-dim: #333;
-		 --track-editor-bg-noise: #444;
-		 --track-editor-bg-noise-dim: #333;
-		 --track-editor-bg-mod: #234;
-		 --track-editor-bg-mod-dim: #123;
-		 --multiplicative-mod-slider: #456;
-		 --overwriting-mod-slider: #654;
-		 --indicator-primary: #8153E0;
-		 --indicator-secondary: #3D303F;
-		 --select2-opt-group: #585858;
-		 --input-box-outline: #333;
-		 --mute-button-normal: #D8AE2B;
-		 --mute-button-mod: #8153E0;
-		 --pitch1-secondary-channel: #156C99;
-		 --pitch1-primary-channel:   #00CEE2;
-		 --pitch1-secondary-note:    #005CBF;
-		 --pitch1-primary-note:      #00CEE2;
-		 --pitch2-secondary-channel: #C13C40;
-		 --pitch2-primary-channel:   #E0C218;
-		 --pitch2-secondary-note:    #C13C40;
-		 --pitch2-primary-note:      #E0C218;
-		 --pitch3-secondary-channel: #4D4529;
-		 --pitch3-primary-channel:   #C62936;
-		 --pitch3-secondary-note:    #4D4529;
-		 --pitch3-primary-note:      #C62936;
-		 --pitch4-secondary-channel: #00333F;
-		 --pitch4-primary-channel:   #00A960;
-		 --pitch4-secondary-note:    #00333F;
-		 --pitch4-primary-note:      #00A960;
-		 --pitch5-secondary-channel: #590CA8;
-		 --pitch5-primary-channel:   #8874C9;
-		 --pitch5-secondary-note:    #590CA8;
-		 --pitch5-primary-note:      #8874C9;
-		 --pitch6-secondary-channel: #7017BC;
-		 --pitch6-primary-channel:   #8CACE2;
-		 --pitch6-secondary-note:    #7017BC;
-		 --pitch6-primary-note:      #8CACE2;
-		 --pitch7-secondary-channel: #631A21;
-		 --pitch7-primary-channel:   #BADB3A;
-		 --pitch7-secondary-note:    #631A21;
-		 --pitch7-primary-note:      #BADB3A;
-		 --pitch8-secondary-channel: #690076;
-		 --pitch8-primary-channel:   #ED6DCA;
-		 --pitch8-secondary-note:    #690076;
-		 --pitch8-primary-note:      #ED6DCA;
-		 --pitch9-secondary-channel: #194945;
-		 --pitch9-primary-channel:   #1ECD58;
-		 --pitch9-secondary-note:    #194945;
-		 --pitch9-primary-note:      #1ECD58;
-		 --pitch10-secondary-channel: #561070;
-		 --pitch10-primary-channel:   #9E71CE;
-		 --pitch10-secondary-note:    #561070;
-		 --pitch10-primary-note:      #9E71CE;
-		 --noise1-secondary-channel: #572C59;
-		 --noise1-primary-channel:   #CAC9CC;
-		 --noise1-secondary-note:    #572C59;
-		 --noise1-primary-note:      #CAC9CC;
-		 --noise2-secondary-channel: #77174B;
-		 --noise2-primary-channel:   #DBBE85;
-		 --noise2-secondary-note:    #77174B;
-		 --noise2-primary-note:      #DBBE85;
-		 --noise3-secondary-channel: #70195D;
-		 --noise3-primary-channel:   #B19998;
-		 --noise3-secondary-note:    #70195D;
-		 --noise3-primary-note:      #EDDCEC;
-		 --noise4-secondary-channel: #720B87;
-		 --noise4-primary-channel:   #BD81DB;
-		 --noise4-secondary-note:    #720B87;
-		 --noise4-primary-note:      #BD81DB;
-		 --noise5-secondary-channel: #821B5C;
-		 --noise5-primary-channel:   #C6D88A;
-		 --noise5-secondary-note:    #821B5C;
-		 --noise5-primary-note:      #C6D88A;
-		 --mod1-secondary-channel: #156C99;
-		 --mod1-primary-channel:   #00CEE2;
-		 --mod1-secondary-note:    #005CBF;
-		 --mod1-primary-note:      #00CEE2;
-		 --mod2-secondary-channel: #C13C40;
-		 --mod2-primary-channel:   #E0C218;
-		 --mod2-secondary-note:    #C13C40;
-		 --mod2-primary-note:      #E0C218;
-		 --mod3-secondary-channel: #4D4529;
-		 --mod3-primary-channel:   #C62936;
-		 --mod3-secondary-note:    #4D4529;
-		 --mod3-primary-note:      #C62936;
-		 --mod4-secondary-channel: #00333F;
-		 --mod4-primary-channel:   #00A960;
-		 --mod4-secondary-note:    #00333F;
-		 --mod4-primary-note:      #00A960;
-		 --mod-label-primary:        #999;
-		 --mod-label-secondary-text: #333;
-		 --mod-label-primary-text:   black;
-		 --disabled-note-primary:    #B6B7C4;
-		 --disabled-note-secondary:  #3D303F;
-		}
 			`,
 			 "fogbox": `
 			:root {
@@ -4999,249 +5061,6 @@ export class ColorConfig {
 					--disabled-note-primary:    #999;
 					--disabled-note-secondary:  #666;
 				}
-			`,
-			 "ultrabox rainbow": `
-			:root {
-				--page-margin: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
-				--editor-background: transparent;
-				--hover-preview: lime;
-				--playhead: lime;
-				--primary-text: lime;
-				--secondary-text: red;
-				--inverted-text: black;
-				--text-selection: rgba(119,68,255,0.99);
-				--box-selection-fill: rgba(255,255,255,0.2);
-				--loop-accent: blue;
-				--link-accent: yellow;
-				--ui-widget-background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
-				--ui-widget-focus: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
-				--pitch-background: #444;
-				--tonic: indigo;
-				--fifth-note: #468;
-				--white-piano-key: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
-				--black-piano-key: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
-				--white-piano-key-text: lime;
-				--black-piano-key-text: purple;
-					--use-color-formula: false;
-					--track-editor-bg-pitch: #444;
-					--track-editor-bg-pitch-dim: #333;
-					--track-editor-bg-noise: #444;
-					--track-editor-bg-noise-dim: #333;
-					--track-editor-bg-mod: #234;
-					--track-editor-bg-mod-dim: #123;
-					--multiplicative-mod-slider: #456;
-					--overwriting-mod-slider: #654;
-					--indicator-primary: #74f;
-					--indicator-secondary: #444;
-					--select2-opt-group: #585858;
-					--input-box-outline: #333;
-					--mute-button-normal: #ffa033;
-					--mute-button-mod: #9a6bff;
-				--pitch1-secondary-channel: #0099A1;
-				--pitch1-primary-channel:   #25F3FF;
-				--pitch1-secondary-note:    #00BDC7;
-				--pitch1-primary-note:      #92F9FF;
-				--pitch2-secondary-channel: #A1A100;
-				--pitch2-primary-channel:   #FFFF25;
-				--pitch2-secondary-note:    #C7C700;
-				--pitch2-primary-note:      #FFFF92;
-				--pitch3-secondary-channel: #C75000;
-				--pitch3-primary-channel:   #FF9752;
-				--pitch3-secondary-note:    #FF771C;
-				--pitch3-primary-note:      #FFCDAB;
-				--pitch4-secondary-channel: #00A100;
-				--pitch4-primary-channel:   #50FF50;
-				--pitch4-secondary-note:    #00C700;
-				--pitch4-primary-note:      #A0FFA0;
-				--pitch5-secondary-channel: #D020D0;
-				--pitch5-primary-channel:   #FF90FF;
-				--pitch5-secondary-note:    #E040E0;
-				--pitch5-primary-note:      #FFC0FF;
-				--pitch6-secondary-channel: #7777B0;
-				--pitch6-primary-channel:   #A0A0FF;
-				--pitch6-secondary-note:    #8888D0;
-				--pitch6-primary-note:      #D0D0FF;
-				--pitch7-secondary-channel: #8AA100;
-				--pitch7-primary-channel:   #DEFF25;
-				--pitch7-secondary-note:    #AAC700;
-				--pitch7-primary-note:      #E6FF92;
-				--pitch8-secondary-channel: #DF0019;
-				--pitch8-primary-channel:   #FF98A4;
-				--pitch8-secondary-note:    #FF4E63;
-				--pitch8-primary-note:      #FFB2BB;
-				--pitch9-secondary-channel: #00A170;
-				--pitch9-primary-channel:   #50FFC9;
-				--pitch9-secondary-note:    #00C78A;
-				--pitch9-primary-note:      #83FFD9;
-				--pitch10-secondary-channel:#A11FFF;
-				--pitch10-primary-channel:  #CE8BFF;
-				--pitch10-secondary-note:   #B757FF;
-				--pitch10-primary-note:     #DFACFF;
-				--noise1-secondary-channel: #6F6F6F;
-				--noise1-primary-channel:   #AAAAAA;
-				--noise1-secondary-note:    #A7A7A7;
-				--noise1-primary-note:      #E0E0E0;
-				--noise2-secondary-channel: #996633;
-				--noise2-primary-channel:   #DDAA77;
-				--noise2-secondary-note:    #CC9966;
-				--noise2-primary-note:      #F0D0BB;
-				--noise3-secondary-channel: #4A6D8F;
-				--noise3-primary-channel:   #77AADD;
-				--noise3-secondary-note:    #6F9FCF;
-				--noise3-primary-note:      #BBD7FF;
-				--noise4-secondary-channel: #7A4F9A;
-				--noise4-primary-channel:   #AF82D2;
-				--noise4-secondary-note:    #9E71C1;
-				--noise4-primary-note:      #D4C1EA;
-				--noise5-secondary-channel: #607837;
-				--noise5-primary-channel:   #A2BB77;
-				--noise5-secondary-note:    #91AA66;
-				--noise5-primary-note:      #C5E2B2;
-          --mod1-secondary-channel:   #339955;
-					--mod1-primary-channel:     #77fc55;
-					--mod1-secondary-note:      #77ff8a;
-					--mod1-primary-note:        #cdffee;
-					--mod2-secondary-channel:   #993355;
-					--mod2-primary-channel:     #f04960;
-					--mod2-secondary-note:      #f057a0;
-					--mod2-primary-note:        #ffb8de;
-					--mod3-secondary-channel:   #553399;
-					--mod3-primary-channel:     #8855fc;
-					--mod3-secondary-note:      #aa64ff;
-					--mod3-primary-note:	    #f8ddff;
-					--mod4-secondary-channel:   #a86436;
-					--mod4-primary-channel:     #c8a825;
-					--mod4-secondary-note:      #e8ba46;
-					--mod4-primary-note:        #fff6d3;
-					--mod-label-primary:        #999;
-					--mod-label-secondary-text: #333;
-					--mod-label-primary-text:   black;
-					--disabled-note-primary:    #999;
-					--disabled-note-secondary:  #666;
-				}
-			`,
-			  "ultrabox upside-down beepbox": `
-			:root {
-				--page-margin: black;
-				--editor-background: black;
-				--hover-preview: white;
-				--playhead: white;
-				--primary-text: white;
-				--secondary-text: #999;
-				--inverted-text: black;
-				--text-selection: rgba(119,68,255,0.99);
-				--box-selection-fill: rgba(255,255,255,0.2);
-				--loop-accent: #74f;
-				--link-accent: #98f;
-				--ui-widget-background: #444;
-				--ui-widget-focus: #777;
-				--pitch-background: #444;
-				--tonic: #864;
-				--fifth-note: #468;
-				--white-piano-key: #bbb;
-				--black-piano-key: #444;
-				--white-piano-key-text: #131200;
-				--black-piano-key-text: #fff;
-					--use-color-formula: false;
-					--track-editor-bg-pitch: #444;
-					--track-editor-bg-pitch-dim: #333;
-					--track-editor-bg-noise: #444;
-					--track-editor-bg-noise-dim: #333;
-					--track-editor-bg-mod: #234;
-					--track-editor-bg-mod-dim: #123;
-					--multiplicative-mod-slider: #456;
-					--overwriting-mod-slider: #654;
-					--indicator-primary: #74f;
-					--indicator-secondary: #444;
-					--select2-opt-group: #585858;
-					--input-box-outline: #333;
-					--mute-button-normal: #ffa033;
-					--mute-button-mod: #9a6bff;
-				--pitch1-secondary-channel: #0099A1;
-				--pitch1-primary-channel:   #25F3FF;
-				--pitch1-secondary-note:    #00BDC7;
-				--pitch1-primary-note:      #92F9FF;
-				--pitch2-secondary-channel: #A1A100;
-				--pitch2-primary-channel:   #FFFF25;
-				--pitch2-secondary-note:    #C7C700;
-				--pitch2-primary-note:      #FFFF92;
-				--pitch3-secondary-channel: #C75000;
-				--pitch3-primary-channel:   #FF9752;
-				--pitch3-secondary-note:    #FF771C;
-				--pitch3-primary-note:      #FFCDAB;
-				--pitch4-secondary-channel: #00A100;
-				--pitch4-primary-channel:   #50FF50;
-				--pitch4-secondary-note:    #00C700;
-				--pitch4-primary-note:      #A0FFA0;
-				--pitch5-secondary-channel: #D020D0;
-				--pitch5-primary-channel:   #FF90FF;
-				--pitch5-secondary-note:    #E040E0;
-				--pitch5-primary-note:      #FFC0FF;
-				--pitch6-secondary-channel: #7777B0;
-				--pitch6-primary-channel:   #A0A0FF;
-				--pitch6-secondary-note:    #8888D0;
-				--pitch6-primary-note:      #D0D0FF;
-				--pitch7-secondary-channel: #8AA100;
-				--pitch7-primary-channel:   #DEFF25;
-				--pitch7-secondary-note:    #AAC700;
-				--pitch7-primary-note:      #E6FF92;
-				--pitch8-secondary-channel: #DF0019;
-				--pitch8-primary-channel:   #FF98A4;
-				--pitch8-secondary-note:    #FF4E63;
-				--pitch8-primary-note:      #FFB2BB;
-				--pitch9-secondary-channel: #00A170;
-				--pitch9-primary-channel:   #50FFC9;
-				--pitch9-secondary-note:    #00C78A;
-				--pitch9-primary-note:      #83FFD9;
-				--pitch10-secondary-channel:#A11FFF;
-				--pitch10-primary-channel:  #CE8BFF;
-				--pitch10-secondary-note:   #B757FF;
-				--pitch10-primary-note:     #DFACFF;
-				--noise1-secondary-channel: #6F6F6F;
-				--noise1-primary-channel:   #AAAAAA;
-				--noise1-secondary-note:    #A7A7A7;
-				--noise1-primary-note:      #E0E0E0;
-				--noise2-secondary-channel: #996633;
-				--noise2-primary-channel:   #DDAA77;
-				--noise2-secondary-note:    #CC9966;
-				--noise2-primary-note:      #F0D0BB;
-				--noise3-secondary-channel: #4A6D8F;
-				--noise3-primary-channel:   #77AADD;
-				--noise3-secondary-note:    #6F9FCF;
-				--noise3-primary-note:      #BBD7FF;
-				--noise4-secondary-channel: #7A4F9A;
-				--noise4-primary-channel:   #AF82D2;
-				--noise4-secondary-note:    #9E71C1;
-				--noise4-primary-note:      #D4C1EA;
-				--noise5-secondary-channel: #607837;
-				--noise5-primary-channel:   #A2BB77;
-				--noise5-secondary-note:    #91AA66;
-				--noise5-primary-note:      #C5E2B2;
-          --mod1-secondary-channel:   #339955;
-					--mod1-primary-channel:     #77fc55;
-					--mod1-secondary-note:      #77ff8a;
-					--mod1-primary-note:        #cdffee;
-					--mod2-secondary-channel:   #993355;
-					--mod2-primary-channel:     #f04960;
-					--mod2-secondary-note:      #f057a0;
-					--mod2-primary-note:        #ffb8de;
-					--mod3-secondary-channel:   #553399;
-					--mod3-primary-channel:     #8855fc;
-					--mod3-secondary-note:      #aa64ff;
-					--mod3-primary-note:	    #f8ddff;
-					--mod4-secondary-channel:   #a86436;
-					--mod4-primary-channel:     #c8a825;
-					--mod4-secondary-note:      #e8ba46;
-					--mod4-primary-note:        #fff6d3;
-					--mod-label-primary:        #999;
-					--mod-label-secondary-text: #333;
-					--mod-label-primary-text:   black;
-					--disabled-note-primary:    #999;
-					--disabled-note-secondary:  #666;
-				}
-				.beepboxEditor{
-	transform: rotate(0.5turn);
-}
 			`,
 			"foxbox": `
 			:root {
@@ -5366,7 +5185,6 @@ export class ColorConfig {
 			 "wackybox": `
 			
 			:root {
-				cursor: url('wackybox_cursor.png'), auto;
 				--page-margin: black;
 				--editor-background: black;
 				--hover-preview: white;
@@ -5402,6 +5220,8 @@ export class ColorConfig {
 					--input-box-outline: #333;
 					--mute-button-normal: #ffa033;
 					--mute-button-mod: #9a6bff;
+					--pitch-channel-limit: 6;
+					--noise-channel-limit: 3;
 				--pitch1-secondary-channel: #0099A1;
 				--pitch1-primary-channel:   #25F3FF;
 				--pitch1-secondary-note:    #00BDC7;
@@ -5485,45 +5305,9 @@ export class ColorConfig {
 					--disabled-note-secondary:  #666;
 				}
 
-.beepboxEditor {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-		
-.beepboxEditor .tip {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.beepboxEditor .prompt label {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.beepboxEditor .layout-option {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.beepboxEditor select {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.select2-selection__rendered {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.select2-container--default .select2-results__group {
-    cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.beepboxEditor button {
-	 cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.beepboxEditor canvas {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
-
-.beepboxEditor input {
-	cursor: url('wackybox_cursor.png'), auto !important;;
-}
+				* {
+					cursor: url("wackybox_cursor.png"), auto !important;
+				}
 
 			`,
 			 "microbox": `
@@ -5756,261 +5540,392 @@ export class ColorConfig {
 			  --disabled-note-secondary: #331512;
 			}
 			`,
-			 "ultrabox terminal": `
-				
-				@import url(https://fonts.googleapis.com/css?family=VT323);		
-:root {
-				--page-margin: black;
-				--editor-background: black;
-				--hover-preview: #000200;
-				--playhead: #393;
-				--primary-text: #393;
-				--secondary-text: #393;
-				--inverted-text: #011910;
-				--text-selection: #393;
-				--box-selection-fill: #393;
-				--loop-accent: #393;
-				--link-accent: #393;
-				--ui-widget-background:  #000800;
-				--ui-widget-focus: #011910;
-				--pitch-background: #000800;
-				--tonic: #000600;
-				--fifth-note: #393;
-				--white-piano-key: white;
-				--black-piano-key: black;
-				--white-piano-key-text: #131200;
-				--black-piano-key-text: #fff;
-					--use-color-formula: false;
-					--track-editor-bg-pitch: #000800;
-					--track-editor-bg-pitch-dim: #000600;
-					--track-editor-bg-noise: #000800;
-					--track-editor-bg-noise-dim: #000600;
-					--track-editor-bg-mod: #000800;
-					--track-editor-bg-mod-dim: #000600;
-					--multiplicative-mod-slider: #456;
-					--overwriting-mod-slider: #393;
-					--indicator-primary: #393;
-					--indicator-secondary: #222;
-					--select2-opt-group: #393;
-					--input-box-outline: transparent;
-					--mute-button-normal: #393;
-					--mute-button-mod: #393;
-				--pitch1-secondary-channel: #011910;
-				--pitch1-primary-channel:   #393;
-				--pitch1-secondary-note:    #011910;
-				--pitch1-primary-note:      #393;
-			--pitch2-secondary-channel: #011910;
-				--pitch2-primary-channel:   #393;
-				--pitch2-secondary-note:    #011910;
-				--pitch2-primary-note:      #393;
-				--pitch3-secondary-channel: #011910;
-				--pitch3-primary-channel:   #393;
-				--pitch3-secondary-note:    #011910;
-				--pitch3-primary-note:      #393;
-			--pitch4-secondary-channel: #011910;
-				--pitch4-primary-channel:   #393;
-				--pitch4-secondary-note:    #011910;
-				--pitch4-primary-note:      #393;
-			--pitch5-secondary-channel: #011910;
-				--pitch5-primary-channel:   #393;
-				--pitch5-secondary-note:    #011910;
-				--pitch5-primary-note:      #393;
-			--pitch6-secondary-channel: #011910;
-				--pitch6-primary-channel:   #393;
-				--pitch6-secondary-note:    #011910;
-				--pitch6-primary-note:      #393;
-				--pitch7-secondary-channel: #011910;
-				--pitch7-primary-channel:   #393;
-				--pitch7-secondary-note:    #011910;
-				--pitch7-primary-note:      #393;
-			--pitch8-secondary-channel: #011910;
-				--pitch8-primary-channel:   #393;
-				--pitch8-secondary-note:    #011910;
-				--pitch8-primary-note:      #393;
-				--pitch9-secondary-channel: #011910;
-				--pitch9-primary-channel:   #393;
-				--pitch9-secondary-note:    #011910;
-				--pitch9-primary-note:      #393;
-			--pitch10-secondary-channel: #011910;
-				--pitch10-primary-channel:   #393;
-				--pitch10-secondary-note:    #011910;
-				--pitch10-primary-note:      #393;
-				--noise1-secondary-channel: #011910;
-				--noise1-primary-channel:   #393;
-				--noise1-secondary-note:    #011910;
-				--noise1-primary-note:      #393;
-				--noise2-secondary-channel: #011910;
-				--noise2-primary-channel:   #393;
-				--noise2-secondary-note:    #011910;
-				--noise2-primary-note:      #393;
-				--noise3-secondary-channel: #011910;
-				--noise3-primary-channel:   #393;
-				--noise3-secondary-note:    #011910;
-				--noise3-primary-note:      #393;
-				--noise4-secondary-channel: #011910;
-				--noise4-primary-channel:   #393;
-				--noise4-secondary-note:    #011910;
-				--noise4-primary-note:      #393;
-				--noise5-secondary-channel: #011910;
-				--noise5-primary-channel:   #393;
-				--noise5-secondary-note:    #011910;
-				--noise5-primary-note:      #393;
-          --mod1-secondary-channel:   #011910;
-					--mod1-primary-channel:     #393;
-					--mod1-secondary-note:      #011910;
-					--mod1-primary-note:        #393;
-					--mod2-secondary-channel:   #011910;
-					--mod2-primary-channel:     #393;
-					--mod2-secondary-note:      #011910;
-					--mod2-primary-note:        #393;
-					--mod3-secondary-channel:   #011910;
-					--mod3-primary-channel:     #393;
-					--mod3-secondary-note:      #011910;
-					--mod3-primary-note:	    #393;
-					--mod4-secondary-channel:   #011910;
-					--mod4-primary-channel:     #393;
-					--mod4-secondary-note:      #011910;
-					--mod4-primary-note:        #393;
-					--mod-label-primary:        #999;
-					--mod-label-secondary-text: #333;
-					--mod-label-primary-text:  #222;
-					--disabled-note-primary:    #242;
-					--disabled-note-secondary:  #121;
-					font-family: 'VT323', Courier;
-					
-				}
-				#beepboxEditorContainer::after {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 50%);
-    left: 0;
-    top: 0;
-    background-size: 100% 2px;
-    touch-action: none;
-    pointer-events: none;
-    z-index: 100;
-}
-			`,
-			 "slushie": `
+			"midbox":
+			`:root {
+			--page-margin: #010a1e;
+			--editor-background: #010a1e;
+			--hover-preview: #dfe9fe;
+			--playhead: #e7f5f6;
+			--primary-text: #f0fdff;
+			--secondary-text: #c4c7d7;
+			--inverted-text: #0f0623;
+			--text-selection: #3f0ab4;
+			--box-selection-fill: #32afb3;
+			--loop-accent: #1719ff;
+			--link-accent: #83a6ed;
+			--ui-widget-background: #222856;
+			--ui-widget-focus: #21417c;
+			--pitch-background: #10264a;
+			--tonic: #0797ce;
+			--fifth-note: #3e2fb5;
+			--white-piano-key: #ebf3f4;
+			--black-piano-key: #253353;
+			--oscilloscope-line-L: #72dcfc;
+			--oscilloscope-line-R: #304eff;
+			--mod-title: #1b2fff;
+			--use-color-formula: true;
+			--track-editor-bg-pitch: #183b65; 
+			--track-editor-bg-pitch-dim: #1f2c3d;
+			--track-editor-bg-noise: #2e196d;
+			--track-editor-bg-noise-dim: #212038;
+			--track-editor-bg-mod: #066433;
+			--track-editor-bg-mod-dim: #152b1f;
+			--multiplicative-mod-slider: #1242a4;
+			--overwriting-mod-slider: #2218db;
+			--indicator-primary: #1698d3;
+			--indicator-secondary: #1b478e;
+			--select2-opt-group: #312f6d;
+			--input-box-outline: #788b96;
+			--mute-button-normal: #1d34f2;
+			--mute-button-mod: #06bad6;
+			--mod-label-primary: #14383f;
+			--mod-label-secondary-text: #1d7080;
+			--mod-label-primary-text: #b7e9f2;
+			--pitch-secondary-channel-hue: 190;
+			--pitch-secondary-channel-hue-scale: 2.5;
+			--pitch-secondary-channel-sat: 80;
+			--pitch-secondary-channel-sat-scale: 0.1;
+			--pitch-secondary-channel-lum: 50;
+			--pitch-secondary-channel-lum-scale: 0.05;
+			--pitch-primary-channel-hue: 190;
+			--pitch-primary-channel-hue-scale: 2.5;
+			--pitch-primary-channel-sat: 100;
+			--pitch-primary-channel-sat-scale: 0.1;
+			--pitch-primary-channel-lum: 76.5;
+			--pitch-primary-channel-lum-scale: 0.05;
+			--pitch-secondary-note-hue: 190;
+			--pitch-secondary-note-hue-scale: 2.5;
+			--pitch-secondary-note-sat: 90;
+			--pitch-secondary-note-sat-scale: 0.1;
+			--pitch-secondary-note-lum: 30;
+			--pitch-secondary-note-lum-scale: 0.05;
+			--pitch-primary-note-hue: 190;
+			--pitch-primary-note-hue-scale: 2.5;
+			--pitch-primary-note-sat: 100;
+			--pitch-primary-note-sat-scale: 0.05;
+			--pitch-primary-note-lum: 85;
+			--pitch-primary-note-lum-scale: 0.025;
+			--noise-secondary-channel-hue: 200;
+			--noise-secondary-channel-hue-scale: 2.5;
+			--noise-secondary-channel-sat: 25;
+			--noise-secondary-channel-sat-scale: 0;
+			--noise-secondary-channel-lum: 42;
+			--noise-secondary-channel-lum-scale: 0;
+			--noise-primary-channel-hue: 200;
+			--noise-primary-channel-hue-scale: 2.5;
+			--noise-primary-channel-sat: 33;
+			--noise-primary-channel-sat-scale: 0;
+			--noise-primary-channel-lum: 63.5;
+			--noise-primary-channel-lum-scale: 0;
+			--noise-secondary-note-hue: 200;
+			--noise-secondary-note-hue-scale: 2.5;
+			--noise-secondary-note-sat: 33.5;
+			--noise-secondary-note-sat-scale: 0;
+			--noise-secondary-note-lum: 55;
+			--noise-secondary-note-lum-scale: 0;
+			--noise-primary-note-hue: 200;
+			--noise-primary-note-hue-scale: 2.5;
+			--noise-primary-note-sat: 46.5;
+			--noise-primary-note-sat-scale: 0;
+			--noise-primary-note-lum: 74;
+			--noise-primary-note-lum-scale: 0;
+			--mod-secondary-channel-hue: 140;
+			--mod-secondary-channel-hue-scale: 1.5;
+			--mod-secondary-channel-sat: 90;
+			--mod-secondary-channel-sat-scale: 0;
+			--mod-secondary-channel-lum: 55;
+			--mod-secondary-channel-lum-scale: 0;
+			--mod-primary-channel-hue: 140;
+			--mod-primary-channel-hue-scale: 1.5;
+			--mod-primary-channel-sat: 100;
+			--mod-primary-channel-sat-scale: 0;
+			--mod-primary-channel-lum: 85;
+			--mod-primary-channel-lum-scale: 0;
+			--mod-secondary-note-hue: 140;
+			--mod-secondary-note-hue-scale: 1.5;
+			--mod-secondary-note-sat: 95;
+			--mod-secondary-note-sat-scale: 0;
+			--mod-secondary-note-lum: 50;
+			--mod-secondary-note-lum-scale: 0;
+			--mod-primary-note-hue: 140;
+			--mod-primary-note-hue-scale: 1.5;
+			--mod-primary-note-sat: 100;
+			--mod-primary-note-sat-scale: 0;
+			--mod-primary-note-lum: 90;
+			--mod-primary-note-lum-scale: 0;
+			--disabled-note-primary:    #53527b;
+			--disabled-note-secondary:  #1c1b30;
+		}
+						`,
+		"dogebox2": `
 			:root {
-				--page-margin: #040814;
-    --editor-background: #040814;
-    --hover-preview: #c6f7ff;
-    --playhead: white;
-    --primary-text: #d3f3ff;
-    --secondary-text: #6f72b5;
-    --inverted-text: black;
-    --text-selection: rgba(119,68,255,0.99);
-    --box-selection-fill: rgb(43 70 171 / 62%);
-    --loop-accent: #573ebb;
-    --link-accent: #98f;
-    --ui-widget-background: #2e2f44;
-    --ui-widget-focus: #2b2c46;
-    --pitch-background: #353654;
-    --tonic: #716fe3;
-    --fifth-note: #76469b;
-    --white-piano-key: #abbce3;
-    --black-piano-key: #2f235e;
-    --use-color-formula: false;
-    --track-editor-bg-pitch: #3a3b5c;
-    --track-editor-bg-pitch-dim: #1f2036;
-    --track-editor-bg-noise: #3c3554;
-    --track-editor-bg-noise-dim: #1e1834;
-    --track-editor-bg-mod: #30335e;
-    --track-editor-bg-mod-dim: #161938;
-    --multiplicative-mod-slider: #e29cff;
-    --overwriting-mod-slider: #495789;
-    --indicator-primary: #e1a6ff;
-    --indicator-secondary: #415187;
-    --select2-opt-group: #22223a;
-    --input-box-outline: #2d2648;
-    --mute-button-normal: #7aceff;
-    --mute-button-mod: #9d6bff;
-    --pitch1-secondary-channel: #5f3ea5;
-    --pitch1-primary-channel: #c1a4ff;
-    --pitch1-secondary-note: #794fd3;
-    --pitch1-primary-note: #d8c6ff;
-    --pitch2-secondary-channel: #4f44bf;
-    --pitch2-primary-channel: #9287ff;
-    --pitch2-secondary-note: #5e51d9;
-    --pitch2-primary-note: #b6afff;
-    --pitch3-secondary-channel: #374eb9;
-    --pitch3-primary-channel: #8097ff;
-    --pitch3-secondary-note: #445cc9;
-    --pitch3-primary-note: #a0b2ff;
-    --pitch4-secondary-channel: #2867cf;
-    --pitch4-primary-channel: #6fa5ff;
-    --pitch4-secondary-note: #2e6ed7;
-    --pitch4-primary-note: #a6c7ff;
-    --pitch5-secondary-channel: #3175a7;
-    --pitch5-primary-channel: #7ec9ff;
-    --pitch5-secondary-note: #367eb3;
-    --pitch5-primary-note: #9fd7ff;
-    --pitch6-secondary-channel: #3993a9;
-    --pitch6-primary-channel: #8ce9ff;
-    --pitch6-secondary-note: #386da3;
-    --pitch6-primary-note: #9eecff;
-    --pitch7-secondary-channel: #369d8a;
-    --pitch7-primary-channel: #8bfce7;
-    --pitch7-secondary-note: #1c93a7;
-    --pitch7-primary-note: #abffef;
-    --pitch8-secondary-channel: #00A170;
-    --pitch8-primary-channel: #50FFC9;
-    --pitch8-secondary-note: #00C78A;
-    --pitch8-primary-note: #83FFD9;
-    --pitch9-secondary-channel: #49b374;
-    --pitch9-primary-channel: #8affa9;
-    --pitch9-secondary-note: #26815f;
-    --pitch9-primary-note: #c8ffde;
-    --pitch10-secondary-channel: #58a747;
-    --pitch10-primary-channel: #bbffaa;
-    --pitch10-secondary-note: #1d7c48;
-    --pitch10-primary-note: #c7ffbc;
-    --noise1-secondary-channel: #42829b;
-    --noise1-primary-channel: #97d3fc;
-    --noise1-secondary-note: #3f53b3;
-    --noise1-primary-note: #97d3fc;
-    --noise2-secondary-channel: #6354bb;
-    --noise2-primary-channel: #9a89ff;
-    --noise2-secondary-note: #5f4dcd;
-    --noise2-primary-note: #c6bcff;
-    --noise3-secondary-channel: #704a95;
-    --noise3-primary-channel: #c285ff;
-    --noise3-secondary-note: #ad5aff;
-    --noise3-primary-note: #d3a6ff;
-    --noise4-secondary-channel: #a53c65;
-    --noise4-primary-channel: #f794bb;
-    --noise4-secondary-note: #cb5080;
-    --noise4-primary-note: #f794bb;
-    --noise5-secondary-channel: #9b2d2d;
-    --noise5-primary-channel: #ff7676;
-    --noise5-secondary-note: #cb4444;
-    --noise5-primary-note: #ff9999;
-    --mod1-secondary-channel: #b7613c;
-    --mod1-primary-channel: #ff9f76;
-    --mod1-secondary-note: #e77e52;
-    --mod1-primary-note: #ffb99b;
-    --mod2-secondary-channel: #916d34;
-    --mod2-primary-channel: #fece80;
-    --mod2-secondary-note: #c58b35;
-    --mod2-primary-note: #ffdda5;
-    --mod3-secondary-channel: #83761a;
-    --mod3-primary-channel: #fdf68c;
-    --mod3-secondary-note: #c18e00;
-    --mod3-primary-note: #fdf68c;
-    --mod4-secondary-channel: #a86436;
-    --mod4-primary-channel: #c8a825;
-    --mod4-secondary-note: #e8ba46;
-    --mod4-primary-note: #c8a825;
-    --mod-label-primary: #37325e;
-    --mod-label-secondary-text: #6e8aa7;
-    --mod-label-primary-text: #c1ffff;
-    --disabled-note-primary: #999;
-    --disabled-note-secondary: #666;
-				}
-			`,
+				--page-margin: #000015;
+				--editor-background: #000015;
+				--hover-preview: #00ffff;
+				--playhead: #00ffff;
+				--primary-text: white;
+				--secondary-text: #999;
+				--inverted-text: black;
+				--text-selection: rgba(255, 127, 80, 0.99);
+				--box-selection-fill: rgba(255, 255, 255, 0.2);
+				--loop-accent: #ff00ff;
+				--link-accent: #00ffff;
+				--ui-widget-background: #222222;
+				--ui-widget-focus: #444444;
+				--pitch-background: #222222;
+				--tonic: #ab382c;
+				--fifth-note: #2a76a8;
+				--white-piano-key: #ffffff;
+				--black-piano-key: #222222;
+				--white-piano-key-text: #000000;
+				--use-color-formula: false;
+				--track-editor-bg-pitch: #222222;
+				--track-editor-bg-pitch-dim: #111111;
+				--track-editor-bg-noise: #222222;
+				--track-editor-bg-noise-dim: #111111;
+				--track-editor-bg-mod: #333333;
+				--track-editor-bg-mod-dim: #111111;
+				--multiplicative-mod-slider: #666666;
+				--overwriting-mod-slider: #666666;
+				--indicator-primary: #ff00ff;
+				--indicator-secondary: #00ffff;
+				--select2-opt-group: #333333;
+				--input-box-outline: #444444;
+				--mute-button-normal: #ff00ff;
+				--mute-button-mod: #00ffff;
+				--mod-label-primary: #282840;
+				--mod-label-secondary-text: rgb(87, 86, 120);
+				--mod-label-primary-text: white;
+				--pitch1-secondary-channel: #bd9909;
+				--pitch1-primary-channel: #fbff8e;
+				--pitch1-secondary-note: #c79d3a;
+				--pitch1-primary-note: #fdffb2;
+				--pitch2-secondary-channel: #b86e0d;
+				--pitch2-primary-channel: #ffb28e;
+				--pitch2-secondary-note: #ba643a;
+				--pitch2-primary-note: #fbac92;
+				--pitch3-secondary-channel: #a81b08;
+				--pitch3-primary-channel: #f56c67;
+				--pitch3-secondary-note: #94352b;
+				--pitch3-primary-note: #f56147;
+				--pitch4-secondary-channel: #2a7722;
+				--pitch4-primary-channel: #6ebf5e;
+				--pitch4-secondary-note: #1c5c18;
+				--pitch4-primary-note: #88cf82;
+				--pitch5-secondary-channel: #8c8b3c;
+				--pitch5-primary-channel: #c3c168;
+				--pitch5-secondary-note: #747330;
+				--pitch5-primary-note: #d4d394;
+				--pitch6-secondary-channel: #3f9577;
+				--pitch6-primary-channel: #6fc4b4;
+				--pitch6-secondary-note: #2c6a5c;
+				--pitch6-primary-note: #8fdad0;
+				--pitch7-secondary-channel: #204a80;
+				--pitch7-primary-channel: #6d9fc2;
+				--pitch7-secondary-note: #132f5a;
+				--pitch7-primary-note: #9dbed8;
+				--pitch8-secondary-channel: #a531ad;
+				--pitch8-primary-channel: #db68e3;
+				--pitch8-secondary-note: #8d2f94;
+				--pitch8-primary-note: #e66cbf;
+				--pitch9-secondary-channel: #03a1a1;
+				--pitch9-primary-channel: #52fffb;
+				--pitch9-secondary-note: #34baba;
+				--pitch9-primary-note: #60fbfb;
+				--pitch10-secondary-channel: #4208a1;
+				--pitch10-primary-channel: #9282ff;
+				--pitch10-secondary-note: #5735b5;
+				--pitch10-primary-note: #ab52fb;
+				--noise1-secondary-channel: #2a5555;
+				--noise1-primary-channel: #4c7878;
+				--noise1-secondary-note: #6e9a9a;
+				--noise1-primary-note: #90bcbc;
+				--noise2-secondary-channel: #553355;
+				--noise2-primary-channel: #775577;
+				--noise2-secondary-note: #997799;
+				--noise2-primary-note: #bbaa99;
+				--noise3-secondary-channel: #2a6622;
+				--noise3-primary-channel: #4c8844;
+				--noise3-secondary-note: #6eaa66;
+				--noise3-primary-note: #90cc88;
+				--noise4-secondary-channel: #664400;
+				--noise4-primary-channel: #886600;
+				--noise4-secondary-note: #aa8800;
+				--noise4-primary-note: #cccc00;
+				--noise5-secondary-channel: #006633;
+				--noise5-primary-channel: #008855;
+				--noise5-secondary-note: #00aa77;
+				--noise5-primary-note: #00cc99;
+				--mod1-secondary-channel: #fe00ff;
+				--mod1-primary-channel: #ff72ff;
+				--mod1-secondary-note: #ff92ff;
+				--mod1-primary-note: #ffb2fb;
+				--mod2-secondary-channel: #00fe00;
+				--mod2-primary-channel: #8eff8e;
+				--mod2-secondary-note: #92ff92;
+				--mod2-primary-note: #b2ffb2;
+				--mod3-secondary-channel: #feff00;
+				--mod3-primary-channel: #fffb8e;
+				--mod3-secondary-note: #fffd92;
+				--mod3-primary-note: #fffe92;
+				--mod4-secondary-channel: #00fffe;
+				--mod4-primary-channel: #82fffb;
+				--mod4-secondary-note: #92ffff;
+				--mod4-primary-note: #b2fffb;
+				--disabled-note-primary: #c6c6c6;
+				--disabled-note-secondary: #8c8c8c;
+				}`,
+		"azur lane":`
+		:root {
+			--page-margin: #19337e;
+			--editor-background: #000333cf;
+			--hover-preview: white;
+			--playhead: rgba(255, 255, 255, 0.9);
+			--primary-text: #9af9ff;
+			--secondary-text: #4072dd;
+			--inverted-text: black;
+			--text-selection: rgba(119,68,255,0.99);
+			--box-selection-fill: #044b94;
+			--loop-accent: #950d0d;
+			--link-accent: #0072ff;
+			--ui-widget-background: #255bb3;
+			--ui-widget-focus: #757575;
+			--pitch-background: #20468b73;
+			--tonic: #c9c9c9;
+			--fifth-note: #731d1d;
+			--white-piano-key: #eee;
+			--black-piano-key: #000;
+			--white-piano-key-text: #131200;
+			--black-piano-key-text: #fff;
+			--use-color-formula: false;
+			--track-editor-bg-pitch: #535a73;
+			--track-editor-bg-pitch-dim: #353643;
+			--track-editor-bg-noise: #770000;
+			--track-editor-bg-noise-dim: #430000;
+			--track-editor-bg-mod: #5d1d06;
+			--track-editor-bg-mod-dim: #270000;
+			--multiplicative-mod-slider: #bb0000;
+			--overwriting-mod-slider: #ad0000;
+			--indicator-primary: #9c64f7;
+			--indicator-secondary: #393e4f;
+			--select2-opt-group: #5d576f;
+			--input-box-outline: #002957;
+			--mute-button-normal: #ffffff;
+			--mute-button-mod: #4f4f4f;
+			--mod-label-primary: #531313;
+			--pitch1-secondary-channel: #80858d;
+		  --pitch1-primary-channel: #f2f7ff;
+		  --pitch1-secondary-note: #80858d;
+		  --pitch1-primary-note: #f2f7ff;
+		  --pitch2-secondary-channel: #7392ad;
+		  --pitch2-primary-channel: #a8d6ff;
+		  --pitch2-secondary-note: #7392ad;
+		  --pitch2-primary-note: #a8d6ff;
+		  --pitch3-secondary-channel: #4b7eaa;
+		  --pitch3-primary-channel: #71bdff;
+		  --pitch3-secondary-note: #4b7eaa;
+		  --pitch3-primary-note: #71bdff;
+		  --pitch4-secondary-channel: #3594b1;
+		  --pitch4-primary-channel: #48d4ff;
+		  --pitch4-secondary-note: #3594b1;
+		  --pitch4-primary-note: #48d4ff;
+		  --pitch5-secondary-channel: #1b98b1;
+		  --pitch5-primary-channel: #30f1ff;
+		  --pitch5-secondary-note: #1b98b1;
+		  --pitch5-primary-note: #30f1ff;
+		  --pitch6-secondary-channel: #9e0000;
+		  --pitch6-primary-channel: #db0000;
+		  --pitch6-secondary-note: #9e0000;
+		  --pitch6-primary-note: #db0000;
+		  --pitch7-secondary-channel: #7c1717;
+		  --pitch7-primary-channel: #9e0000;
+		  --pitch7-secondary-note: #7c1717;
+		  --pitch7-primary-note: #9e0000;
+		  --pitch8-secondary-channel: #5c1f1f;
+		  --pitch8-primary-channel: #7c1717;
+		  --pitch8-secondary-note: #5c1f1f;
+		  --pitch8-primary-note: #7c1717;
+		  --pitch9-secondary-channel: #3e2020;
+		  --pitch9-primary-channel: #5c1f1f;
+		  --pitch9-secondary-note: #3e2020;
+		  --pitch9-primary-note: #5c1f1f;
+		  --pitch10-secondary-channel: #2f1c1c;
+		  --pitch10-primary-channel: #5c1f1f;
+		  --pitch10-secondary-note: #2f1c1c;
+		  --pitch10-primary-note: #5c1f1f;
+		  --noise1-secondary-channel: #828282;
+		  --noise1-primary-channel: #cacaca;
+		  --noise1-secondary-note: #828282;
+		  --noise1-primary-note: #cacaca;
+		  --noise2-secondary-channel: #2f8baf;
+		  --noise2-primary-channel: #3de2ff;
+		  --noise2-secondary-note: #2f8baf;
+		  --noise2-primary-note: #3de2ff;
+		  --noise3-secondary-channel: #6f50b1;
+		  --noise3-primary-channel: #8567ff;
+		  --noise3-secondary-note: #6f50b1;
+		  --noise3-primary-note: #8567ff;
+		  --noise4-secondary-channel: #d38900;
+		  --noise4-primary-channel: #ffb500;
+		  --noise4-secondary-note: #d38900;
+		  --noise4-primary-note: #ffb500;
+		  --noise5-secondary-channel: #af0008;
+		  --noise5-primary-channel: #00d70e;
+		  --noise5-secondary-note: #29b700;
+		  --noise5-primary-note: #00f7ff;
+		  --mod1-secondary-channel: #9d5bb9;
+		  --mod1-primary-channel: #e16bff;
+		  --mod1-secondary-note: #3a3ea4;
+		  --mod1-primary-note: #fff;
+		  --mod2-secondary-channel: #3a8d58;
+		  --mod2-primary-channel: #42ffff;
+		  --mod2-secondary-note: #3a8d58;
+		  --mod2-primary-note: #42ffff;
+		  --mod3-secondary-channel: #af6c00;
+		  --mod3-primary-channel: #fa0;
+		  --mod3-secondary-note: #0001a2;
+		  --mod3-primary-note: #970000;
+		  --mod4-secondary-channel: #d3d3d3;
+		  --mod4-primary-channel: #759bff;
+		  --mod4-secondary-note: #a00000;
+		  --mod4-primary-note: #fff;
+		  --disabled-note-primary: #3a3a3a;
+		  --disabled-note-secondary: #000;
+			}
+		/* replaces hotdog (in a hacky way) with an image of the girls using the same scratch sprites from the 404 page*/
+		#Hotdog {
+		display: none;
+		}
+		.instructions-column > section:first-of-type > p:first-of-type:after {
+		display: block;
+		content: url("UltraboxAzurLaneThemeStarterSquad.png");
+		width: 100%;
+		text-align: center;
+		margin-top: 25px;
+		}
+		/* sets cursor */
+		* {
+		cursor: url("UltraBoxAzurLaneThemeMouse.png"), auto !important;
+		}
+		/* sets background image */
+		body {
+		background-image: url("UltraBoxAzurLaneThemeMemoryTaskBackground.png") !important;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+			}
+			/* make editor background transparent */
+		#beepboxEditorContainer, .beepboxEditor, #text-content {
+		background: #0400257d !important;
+		}
+			#text-content > section > h1 > font {
+		display: none;
+		}
+		#text-content > section > h1 {
+		margin: auto;
+		content: url("UltraBoxALThemeLogo.png");
+		}
+	}`,
 			  "custom": `${localStorage.getItem("customColors") || `:root {
 				--page-margin: #040410;
 				--editor-background: #040410;
@@ -6143,7 +6058,17 @@ export class ColorConfig {
     public static readonly blackPianoKey: string = "var(--black-piano-key)";
     public static readonly whitePianoKeyText: string = "var(--white-piano-key-text)";
     public static readonly blackPianoKeyText: string = "var(--black-piano-key-text)";
+	// public static readonly oscilloscopeLineL: string = "var(--oscilloscope-line-L)";
+	// public static readonly oscilloscopeLineR: string = "var(--oscilloscope-line-R)";
+	// modTitle can stay uncommented until it's used somwhere that's not index.html
+	// public static readonly modTitle: string = "var(--mod-title)";
     public static readonly useColorFormula: string = "var(--use-color-formula)";
+	// public static readonly pitchLimit: string = "var(--pitch-channel-limit)";
+	// public static readonly noiseLimit: string = "var(--noise-channel-limit)";
+	// public static readonly modLimit: string = "var(--mod-channel-limit)";
+	// public static readonly colorFormulaPitchLimit: string = "var(--formula-pitch-channel-limit)";
+	// public static readonly colorFormulaNoiseLimit: string = "var(--formula-noise-channel-limit)";
+	// public static readonly colorFormulaModLimit: string = "var(--formula-mod-channel-limit)";
     public static readonly pitchSecondaryChannelHue: string = "var(--pitch-secondary-channel-hue)";
     public static readonly pitchSecondaryChannelHueScale: string = "var(--pitch-secondary-channel-hue-scale)";
     public static readonly pitchSecondaryChannelSat: string = "var(--pitch-secondary-channel-sat)";
@@ -6235,6 +6160,87 @@ export class ColorConfig {
     public static readonly modLabelPrimaryText: string = "var(--mod-label-primary-text)";
     public static readonly disabledNotePrimary: string = "var(--disabled-note-primary)";
     public static readonly disabledNoteSecondary: string = "var(--disabled-note-secondary)";
+
+	public static c_pitchSecondaryChannelHue: number = 0;
+	public static c_pitchSecondaryChannelHueScale: number = 0;
+	public static c_pitchSecondaryChannelSat: number = 0;
+	public static c_pitchSecondaryChannelSatScale: number = 0;
+	public static c_pitchSecondaryChannelLum: number = 0;
+	public static c_pitchSecondaryChannelLumScale: number = 0;
+	public static c_pitchPrimaryChannelHue: number = 0;
+	public static c_pitchPrimaryChannelHueScale: number = 0;
+	public static c_pitchPrimaryChannelSat: number = 0;
+	public static c_pitchPrimaryChannelSatScale: number = 0;
+	public static c_pitchPrimaryChannelLum: number = 0;
+	public static c_pitchPrimaryChannelLumScale: number = 0;
+	public static c_pitchSecondaryNoteHue: number = 0;
+	public static c_pitchSecondaryNoteHueScale: number = 0;
+	public static c_pitchSecondaryNoteSat: number = 0;
+	public static c_pitchSecondaryNoteSatScale: number = 0;
+	public static c_pitchSecondaryNoteLum: number = 0;
+	public static c_pitchSecondaryNoteLumScale: number = 0;
+	public static c_pitchPrimaryNoteHue: number = 0;
+	public static c_pitchPrimaryNoteHueScale: number = 0;
+	public static c_pitchPrimaryNoteSat: number = 0;
+	public static c_pitchPrimaryNoteSatScale: number = 0;
+	public static c_pitchPrimaryNoteLum: number = 0;
+	public static c_pitchPrimaryNoteLumScale: number = 0;
+	public static c_modSecondaryChannelHue: number = 0;
+	public static c_modSecondaryChannelHueScale: number = 0;
+	public static c_modSecondaryChannelSat: number = 0;
+	public static c_modSecondaryChannelSatScale: number = 0;
+	public static c_modSecondaryChannelLum: number = 0;
+	public static c_modSecondaryChannelLumScale: number = 0;
+	public static c_modPrimaryChannelHue: number = 0;
+	public static c_modPrimaryChannelHueScale: number = 0;
+	public static c_modPrimaryChannelSat: number = 0;
+	public static c_modPrimaryChannelSatScale: number = 0;
+	public static c_modPrimaryChannelLum: number = 0;
+	public static c_modPrimaryChannelLumScale: number = 0;
+	public static c_modSecondaryNoteHue: number = 0;
+	public static c_modSecondaryNoteHueScale: number = 0;
+	public static c_modSecondaryNoteSat: number = 0;
+	public static c_modSecondaryNoteSatScale: number = 0;
+	public static c_modSecondaryNoteLum: number = 0;
+	public static c_modSecondaryNoteLumScale: number = 0;
+	public static c_modPrimaryNoteHue: number = 0;
+	public static c_modPrimaryNoteHueScale: number = 0;
+	public static c_modPrimaryNoteSat: number = 0;
+	public static c_modPrimaryNoteSatScale: number = 0;
+	public static c_modPrimaryNoteLum: number = 0;
+	public static c_modPrimaryNoteLumScale: number = 0;
+	public static c_noiseSecondaryChannelHue: number = 0;
+	public static c_noiseSecondaryChannelHueScale: number = 0;
+	public static c_noiseSecondaryChannelSat: number = 0;
+	public static c_noiseSecondaryChannelSatScale: number = 0;
+	public static c_noiseSecondaryChannelLum: number = 0;
+	public static c_noiseSecondaryChannelLumScale: number = 0;
+	public static c_noisePrimaryChannelHue: number = 0;
+	public static c_noisePrimaryChannelHueScale: number = 0;
+	public static c_noisePrimaryChannelSat: number = 0;
+	public static c_noisePrimaryChannelSatScale: number = 0;
+	public static c_noisePrimaryChannelLum: number = 0;
+	public static c_noisePrimaryChannelLumScale: number = 0;
+	public static c_noiseSecondaryNoteHue: number = 0;
+	public static c_noiseSecondaryNoteHueScale: number = 0;
+	public static c_noiseSecondaryNoteSat: number = 0;
+	public static c_noiseSecondaryNoteSatScale: number = 0;
+	public static c_noiseSecondaryNoteLum: number = 0;
+	public static c_noiseSecondaryNoteLumScale: number = 0;
+	public static c_noisePrimaryNoteHue: number = 0;
+	public static c_noisePrimaryNoteHueScale: number = 0;
+	public static c_noisePrimaryNoteSat: number = 0;
+	public static c_noisePrimaryNoteSatScale: number = 0;
+	public static c_noisePrimaryNoteLum: number = 0;
+	public static c_noisePrimaryNoteLumScale: number = 0;
+
+	public static c_invertedText: string = "";
+	public static c_trackEditorBgNoiseDim: string = "";
+	public static c_trackEditorBgNoise: string = "";
+	public static c_trackEditorBgModDim: string = "";
+	public static c_trackEditorBgMod: string = "";
+	public static c_trackEditorBgPitchDim: string = "";
+	public static c_trackEditorBgPitch: string = "";
 
     public static readonly pitchChannels: DictionaryArray<ChannelColors> = toNameMap([
         {
@@ -6366,20 +6372,26 @@ export class ColorConfig {
 
 	public static getArbitaryChannelColor(type: string, channel: number): ChannelColors {
 
-        if (getComputedStyle(this._styleElement).getPropertyValue("--use-color-formula").trim() == "false") {
+        if (!this.usesColorFormula) {
             let base: ChannelColors;
             switch (type) {
                 case ("noise"): {
-                    base = ColorConfig.noiseChannels[channel % ColorConfig.noiseChannels.length];
+                    base = ColorConfig.getComputed("--noise-channel-limit") == ""
+					? ColorConfig.noiseChannels[channel % ColorConfig.noiseChannels.length] 
+					: ColorConfig.noiseChannels[channel % (Number(ColorConfig.getComputed("--noise-channel-limit")) % ColorConfig.noiseChannels.length)];
                     break;
                 }
                 case ("mod"): {
-                    base = ColorConfig.modChannels[channel % ColorConfig.modChannels.length];
+                    base = ColorConfig.getComputed("--mod-channel-limit") == ""
+					? ColorConfig.modChannels[channel % ColorConfig.modChannels.length] 
+					: ColorConfig.modChannels[channel % (Number(ColorConfig.getComputed("--mod-channel-limit")) % ColorConfig.modChannels.length)];
                     break;
                 }
                 case ("pitch"):
                 default: {
-                    base = ColorConfig.pitchChannels[channel % ColorConfig.pitchChannels.length];
+                    base = ColorConfig.getComputed("--pitch-channel-limit") == ""
+					? ColorConfig.pitchChannels[channel % ColorConfig.pitchChannels.length] 
+					: ColorConfig.pitchChannels[channel % (Number(ColorConfig.getComputed("--pitch-channel-limit")) % ColorConfig.pitchChannels.length)];
                     break;
                 }
             }
@@ -6390,135 +6402,65 @@ export class ColorConfig {
             let newNotePrimary: string = ColorConfig.getComputed((regex.exec(base.primaryNote) as RegExpExecArray)[1] as string);
             return <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
         }
+		let colorFormulaPitchLimit: number = ColorConfig.getComputed("--formula-pitch-channel-limit") == "" ? 360 : Number(ColorConfig.getComputed("--formula-pitch-channel-limit"));
+		let colorFormulaNoiseLimit: number = ColorConfig.getComputed("--formula-noise-channel-limit") == "" ? 360 : Number(ColorConfig.getComputed("--formula-noise-channel-limit"));
+		let colorFormulaModLimit: number = ColorConfig.getComputed("--formula-mod-channel-limit") == "" ? 360 : Number(ColorConfig.getComputed("--formula-mod-channel-limit"));
         switch (type) {
             case ("noise"): {
-                const noiseSecondaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-hue");
-                const noiseSecondaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-hue-scale");
-                const noiseSecondaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-sat");
-                const noiseSecondaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-sat-scale");
-                const noiseSecondaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-lum");
-                const noiseSecondaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-lum-scale");
-                const noisePrimaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-hue");
-                const noisePrimaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-hue-scale");
-                const noisePrimaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-sat");
-                const noisePrimaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-sat-scale");
-                const noisePrimaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-lum");
-                const noisePrimaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-lum-scale");
-                const noiseSecondaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-hue");
-                const noiseSecondaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-hue-scale");
-                const noiseSecondaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-sat");
-                const noiseSecondaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-sat-scale");
-                const noiseSecondaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-lum");
-                const noiseSecondaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-lum-scale");
-                const noisePrimaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-hue");
-                const noisePrimaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-hue-scale");
-                const noisePrimaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-sat");
-                const noisePrimaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-sat-scale");
-                const noisePrimaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-lum");
-                const noisePrimaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-lum-scale");
+				// Noise formula
 
-                let newChannelSecondary: string = "hsl(" + ((+noiseSecondaryChannelHue + ((channel * +noiseSecondaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                    + (+noiseSecondaryChannelSat + channel * +noiseSecondaryChannelSatScale) + "%,"
-                    + (+noiseSecondaryChannelLum + channel * +noiseSecondaryChannelLumScale) + "%)";
-                let newChannelPrimary: string = "hsl(" + ((+noisePrimaryChannelHue + ((channel * +noisePrimaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                    + (+noisePrimaryChannelSat + channel * +noisePrimaryChannelSatScale) + "%,"
-                    + (+noisePrimaryChannelLum + channel * +noisePrimaryChannelLumScale) + "%)";
-                let newNoteSecondary: string = "hsl(" + ((+noiseSecondaryNoteHue + ((channel * +noiseSecondaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                    + (+noiseSecondaryNoteSat + channel * +noiseSecondaryNoteSatScale) + "%,"
-                    + (+noiseSecondaryNoteLum + channel * +noiseSecondaryNoteLumScale) + "%)";
-                let newNotePrimary: string = "hsl(" + ((+noisePrimaryNoteHue + ((channel * +noisePrimaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                    + (+noisePrimaryNoteSat + channel * +noisePrimaryNoteSatScale) + "%,"
-                    + (+noisePrimaryNoteLum + channel * +noisePrimaryNoteLumScale) + "%)";
+                let newChannelSecondary: string = "hsl(" + ((this.c_noiseSecondaryChannelHue + ((channel * this.c_noiseSecondaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+                    + (this.c_noiseSecondaryChannelSat + channel * this.c_noiseSecondaryChannelSatScale) + "%,"
+                    + (this.c_noiseSecondaryChannelLum + channel * this.c_noiseSecondaryChannelLumScale) + "%)";
+                let newChannelPrimary: string = "hsl(" + ((this.c_noisePrimaryChannelHue + ((channel * this.c_noisePrimaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+                    + (this.c_noisePrimaryChannelSat + channel * this.c_noisePrimaryChannelSatScale) + "%,"
+                    + (this.c_noisePrimaryChannelLum + channel * this.c_noisePrimaryChannelLumScale) + "%)";
+                let newNoteSecondary: string = "hsl(" + ((this.c_noiseSecondaryNoteHue + ((channel * this.c_noiseSecondaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+                    + (this.c_noiseSecondaryNoteSat + channel * this.c_noiseSecondaryNoteSatScale) + "%,"
+                    + (this.c_noiseSecondaryNoteLum + channel * this.c_noiseSecondaryNoteLumScale) + "%)";
+                let newNotePrimary: string = "hsl(" + ((this.c_noisePrimaryNoteHue + ((channel * this.c_noisePrimaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+                    + (this.c_noisePrimaryNoteSat + channel * this.c_noisePrimaryNoteSatScale) + "%,"
+                    + (this.c_noisePrimaryNoteLum + channel * this.c_noisePrimaryNoteLumScale) + "%)";
 
                 let newChannelColors = <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
-                ColorConfig.colorLookup.set(channel, newChannelColors);
                 return newChannelColors;
             } case ("mod"): {
                 // Mod formula
-                const modSecondaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-hue");
-                const modSecondaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-hue-scale");
-                const modSecondaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-sat");
-                const modSecondaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-sat-scale");
-                const modSecondaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-lum");
-                const modSecondaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-lum-scale");
-                const modPrimaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-hue");
-                const modPrimaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-hue-scale");
-                const modPrimaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-sat");
-                const modPrimaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-sat-scale");
-                const modPrimaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-lum");
-                const modPrimaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-lum-scale");
-                const modSecondaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-hue");
-                const modSecondaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-hue-scale");
-                const modSecondaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-sat");
-                const modSecondaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-sat-scale");
-                const modSecondaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-lum");
-                const modSecondaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-lum-scale");
-                const modPrimaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-hue");
-                const modPrimaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-hue-scale");
-                const modPrimaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-sat");
-                const modPrimaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-sat-scale");
-                const modPrimaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-lum");
-                const modPrimaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-lum-scale");
 
-                let newChannelSecondary: string = "hsl(" + ((+modSecondaryChannelHue + ((channel * +modSecondaryChannelHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                    + (+modSecondaryChannelSat + channel * +modSecondaryChannelSatScale) + "%,"
-                    + (+modSecondaryChannelLum + channel * +modSecondaryChannelLumScale) + "%)";
-                let newChannelPrimary: string = "hsl(" + ((+modPrimaryChannelHue + ((channel * +modPrimaryChannelHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                    + (+modPrimaryChannelSat + channel * +modPrimaryChannelSatScale) + "%,"
-                    + (+modPrimaryChannelLum + channel * +modPrimaryChannelLumScale) + "%)";
-                let newNoteSecondary: string = "hsl(" + ((+modSecondaryNoteHue + ((channel * +modSecondaryNoteHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                    + (+modSecondaryNoteSat + channel * +modSecondaryNoteSatScale) + "%,"
-                    + (+modSecondaryNoteLum + channel * +modSecondaryNoteLumScale) + "%)";
-                let newNotePrimary: string = "hsl(" + ((+modPrimaryNoteHue + ((channel * +modPrimaryNoteHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                    + (+modPrimaryNoteSat + channel * +modPrimaryNoteSatScale) + "%,"
-                    + (+modPrimaryNoteLum + channel * +modPrimaryNoteLumScale) + "%)";
+                let newChannelSecondary: string = "hsl(" + ((this.c_modSecondaryChannelHue + ((channel * this.c_modSecondaryChannelHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+                    + (this.c_modSecondaryChannelSat + channel * this.c_modSecondaryChannelSatScale) + "%,"
+                    + (this.c_modSecondaryChannelLum + channel * this.c_modSecondaryChannelLumScale) + "%)";
+                let newChannelPrimary: string = "hsl(" + ((this.c_modPrimaryChannelHue + ((channel * this.c_modPrimaryChannelHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+                    + (this.c_modPrimaryChannelSat + channel * this.c_modPrimaryChannelSatScale) + "%,"
+                    + (this.c_modPrimaryChannelLum + channel * this.c_modPrimaryChannelLumScale) + "%)";
+                let newNoteSecondary: string = "hsl(" + ((this.c_modSecondaryNoteHue + ((channel * this.c_modSecondaryNoteHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+                    + (this.c_modSecondaryNoteSat + channel * this.c_modSecondaryNoteSatScale) + "%,"
+                    + (this.c_modSecondaryNoteLum + channel * this.c_modSecondaryNoteLumScale) + "%)";
+                let newNotePrimary: string = "hsl(" + ((this.c_modPrimaryNoteHue + ((channel * this.c_modPrimaryNoteHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+                    + (this.c_modPrimaryNoteSat + channel * this.c_modPrimaryNoteSatScale) + "%,"
+                    + (this.c_modPrimaryNoteLum + channel * this.c_modPrimaryNoteLumScale) + "%)";
 
                 let newChannelColors = <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
-                ColorConfig.colorLookup.set(channel, newChannelColors);
                 return newChannelColors;
             }
             case ("pitch"):
             default: {
-                const pitchSecondaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-hue");
-                const pitchSecondaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-hue-scale");
-                const pitchSecondaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-sat");
-                const pitchSecondaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-sat-scale");
-                const pitchSecondaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-lum");
-                const pitchSecondaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-lum-scale");
-                const pitchPrimaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-hue");
-                const pitchPrimaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-hue-scale");
-                const pitchPrimaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-sat");
-                const pitchPrimaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-sat-scale");
-                const pitchPrimaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-lum");
-                const pitchPrimaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-lum-scale");
-                const pitchSecondaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-hue");
-                const pitchSecondaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-hue-scale");
-                const pitchSecondaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-sat");
-                const pitchSecondaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-sat-scale");
-                const pitchSecondaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-lum");
-                const pitchSecondaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-lum-scale");
-                const pitchPrimaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-hue");
-                const pitchPrimaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-hue-scale");
-                const pitchPrimaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-sat");
-                const pitchPrimaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-sat-scale");
-                const pitchPrimaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-lum");
-                const pitchPrimaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-lum-scale");
+				// Pitch formula
 
-                let newChannelSecondary: string = "hsl(" + ((+pitchSecondaryChannelHue + (channel * +pitchSecondaryChannelHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                    + (+pitchSecondaryChannelSat * (1 - (+pitchSecondaryChannelSatScale * Math.floor(channel / 7)))) + "%,"
-                    + (+pitchSecondaryChannelLum * (1 - (+pitchSecondaryChannelLumScale * Math.floor(channel / 7)))) + "%)";
-                let newChannelPrimary: string = "hsl(" + ((+pitchPrimaryChannelHue + (channel * +pitchPrimaryChannelHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                    + (+pitchPrimaryChannelSat * (1 - (+pitchPrimaryChannelSatScale * Math.floor(channel / 7)))) + "%,"
-                    + (+pitchPrimaryChannelLum * (1 - (+pitchPrimaryChannelLumScale * Math.floor(channel / 7)))) + "%)";
-                let newNoteSecondary: string = "hsl(" + ((+pitchSecondaryNoteHue + (channel * +pitchSecondaryNoteHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                    + (+pitchSecondaryNoteSat * (1 - (+pitchSecondaryNoteSatScale * Math.floor(channel / 7)))) + "%,"
-                    + (+pitchSecondaryNoteLum * (1 - (+pitchSecondaryNoteLumScale * Math.floor(channel / 7)))) + "%)";
-                let newNotePrimary: string = "hsl(" + ((+pitchPrimaryNoteHue + (channel * +pitchPrimaryNoteHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                    + (+pitchPrimaryNoteSat * (1 - (+pitchPrimaryNoteSatScale * Math.floor(channel / 7)))) + "%,"
-                    + (+pitchPrimaryNoteLum * (1 - (+pitchPrimaryNoteLumScale * Math.floor(channel / 7)))) + "%)";
+                let newChannelSecondary: string = "hsl(" + ((this.c_pitchSecondaryChannelHue + (channel * this.c_pitchSecondaryChannelHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+                    + (this.c_pitchSecondaryChannelSat * (1 - (this.c_pitchSecondaryChannelSatScale * Math.floor(channel / 7)))) + "%,"
+                    + (this.c_pitchSecondaryChannelLum * (1 - (this.c_pitchSecondaryChannelLumScale * Math.floor(channel / 7)))) + "%)";
+                let newChannelPrimary: string = "hsl(" + ((this.c_pitchPrimaryChannelHue + (channel * this.c_pitchPrimaryChannelHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+                    + (this.c_pitchPrimaryChannelSat * (1 - (this.c_pitchPrimaryChannelSatScale * Math.floor(channel / 7)))) + "%,"
+                    + (this.c_pitchPrimaryChannelLum * (1 - (this.c_pitchPrimaryChannelLumScale * Math.floor(channel / 7)))) + "%)";
+                let newNoteSecondary: string = "hsl(" + ((this.c_pitchSecondaryNoteHue + (channel * this.c_pitchSecondaryNoteHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+                    + (this.c_pitchSecondaryNoteSat * (1 - (this.c_pitchSecondaryNoteSatScale * Math.floor(channel / 7)))) + "%,"
+                    + (this.c_pitchSecondaryNoteLum * (1 - (this.c_pitchSecondaryNoteLumScale * Math.floor(channel / 7)))) + "%)";
+                let newNotePrimary: string = "hsl(" + ((this.c_pitchPrimaryNoteHue + (channel * this.c_pitchPrimaryNoteHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+                    + (this.c_pitchPrimaryNoteSat * (1 - (this.c_pitchPrimaryNoteSatScale * Math.floor(channel / 7)))) + "%,"
+                    + (this.c_pitchPrimaryNoteLum * (1 - (this.c_pitchPrimaryNoteLumScale * Math.floor(channel / 7)))) + "%)";
 
                 let newChannelColors = <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
-                ColorConfig.colorLookup.set(channel, newChannelColors);
                 return newChannelColors;
             }
         }
@@ -6526,7 +6468,7 @@ export class ColorConfig {
 
     // Same as below, but won't return var colors
     public static getComputedChannelColor(song: Song, channel: number): ChannelColors {
-        if (getComputedStyle(this._styleElement).getPropertyValue("--use-color-formula").trim() == "false") {
+		if (!this.usesColorFormula) {
             let base: ChannelColors = ColorConfig.getChannelColor(song, channel);
             // Trim away "var(...)"
             var regex = /\(([^)]+)\)/;
@@ -6542,14 +6484,20 @@ export class ColorConfig {
     };
 
     public static getChannelColor(song: Song, channel: number): ChannelColors {
-        if (getComputedStyle(this._styleElement).getPropertyValue("--use-color-formula").trim() == "false") {
+		if (!this.usesColorFormula) {
             // Set colors, not defined by formula
             if (channel < song.pitchChannelCount) {
-                return ColorConfig.pitchChannels[channel % ColorConfig.pitchChannels.length];
+				return ColorConfig.getComputed("--pitch-channel-limit") == ""
+				? ColorConfig.pitchChannels[channel % ColorConfig.pitchChannels.length] 
+				: ColorConfig.pitchChannels[channel % (Number(ColorConfig.getComputed("--pitch-channel-limit")) % ColorConfig.pitchChannels.length)];
             } else if (channel < song.pitchChannelCount + song.noiseChannelCount) {
-                return ColorConfig.noiseChannels[(channel - song.pitchChannelCount) % ColorConfig.noiseChannels.length];
+                return ColorConfig.getComputed("--noise-channel-limit") == ""
+				? ColorConfig.noiseChannels[(channel - song.pitchChannelCount) % ColorConfig.noiseChannels.length] 
+				: ColorConfig.noiseChannels[(channel - song.pitchChannelCount) % (Number(ColorConfig.getComputed("--noise-channel-limit")) % ColorConfig.noiseChannels.length)];
             } else {
-                return ColorConfig.modChannels[(channel - song.pitchChannelCount - song.noiseChannelCount) % ColorConfig.modChannels.length];
+                return ColorConfig.getComputed("--mod-channel-limit") == ""
+				? ColorConfig.modChannels[(channel - song.pitchChannelCount - song.noiseChannelCount) % ColorConfig.modChannels.length] 
+				: ColorConfig.modChannels[(channel - song.pitchChannelCount - song.noiseChannelCount) % (Number(ColorConfig.getComputed("--mod-channel-limit")) % ColorConfig.modChannels.length)];
             }
         }
         else {
@@ -6559,45 +6507,24 @@ export class ColorConfig {
             }
             else {
                 // Formulaic color definition
+				let colorFormulaPitchLimit: number = ColorConfig.getComputed("--formula-pitch-channel-limit") == "" ? 360 : Number(ColorConfig.getComputed("--formula-pitch-channel-limit"));
+				let colorFormulaNoiseLimit: number = ColorConfig.getComputed("--formula-noise-channel-limit") == "" ? 360 : Number(ColorConfig.getComputed("--formula-noise-channel-limit"));
+				let colorFormulaModLimit: number = ColorConfig.getComputed("--formula-mod-channel-limit") == "" ? 360 : Number(ColorConfig.getComputed("--formula-mod-channel-limit"));
                 if (channel < song.pitchChannelCount) {
                     // Pitch formula
-                    const pitchSecondaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-hue");
-                    const pitchSecondaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-hue-scale");
-                    const pitchSecondaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-sat");
-                    const pitchSecondaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-sat-scale");
-                    const pitchSecondaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-lum");
-                    const pitchSecondaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-lum-scale");
-                    const pitchPrimaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-hue");
-                    const pitchPrimaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-hue-scale");
-                    const pitchPrimaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-sat");
-                    const pitchPrimaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-sat-scale");
-                    const pitchPrimaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-lum");
-                    const pitchPrimaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-lum-scale");
-                    const pitchSecondaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-hue");
-                    const pitchSecondaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-hue-scale");
-                    const pitchSecondaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-sat");
-                    const pitchSecondaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-sat-scale");
-                    const pitchSecondaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-lum");
-                    const pitchSecondaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-lum-scale");
-                    const pitchPrimaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-hue");
-                    const pitchPrimaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-hue-scale");
-                    const pitchPrimaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-sat");
-                    const pitchPrimaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-sat-scale");
-                    const pitchPrimaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-lum");
-                    const pitchPrimaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-lum-scale");
 
-                    let newChannelSecondary: string = "hsl(" + ((+pitchSecondaryChannelHue + (channel * +pitchSecondaryChannelHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                        + (+pitchSecondaryChannelSat * (1 - (+pitchSecondaryChannelSatScale * Math.floor(channel / 7)))) + "%,"
-                        + (+pitchSecondaryChannelLum * (1 - (+pitchSecondaryChannelLumScale * Math.floor(channel / 7)))) + "%)";
-                    let newChannelPrimary: string = "hsl(" + ((+pitchPrimaryChannelHue + (channel * +pitchPrimaryChannelHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                        + (+pitchPrimaryChannelSat * (1 - (+pitchPrimaryChannelSatScale * Math.floor(channel / 7)))) + "%,"
-                        + (+pitchPrimaryChannelLum * (1 - (+pitchPrimaryChannelLumScale * Math.floor(channel / 7)))) + "%)";
-                    let newNoteSecondary: string = "hsl(" + ((+pitchSecondaryNoteHue + (channel * +pitchSecondaryNoteHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                        + (+pitchSecondaryNoteSat * (1 - (+pitchSecondaryNoteSatScale * Math.floor(channel / 7)))) + "%,"
-                        + (+pitchSecondaryNoteLum * (1 - (+pitchSecondaryNoteLumScale * Math.floor(channel / 7)))) + "%)";
-                    let newNotePrimary: string = "hsl(" + ((+pitchPrimaryNoteHue + (channel * +pitchPrimaryNoteHueScale / Config.pitchChannelCountMax) * 256) % 256) + ","
-                        + (+pitchPrimaryNoteSat * (1 - (+pitchPrimaryNoteSatScale * Math.floor(channel / 7)))) + "%,"
-                        + (+pitchPrimaryNoteLum * (1 - (+pitchPrimaryNoteLumScale * Math.floor(channel / 7)))) + "%)";
+					let newChannelSecondary: string = "hsl(" + ((this.c_pitchSecondaryChannelHue + (channel * this.c_pitchSecondaryChannelHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+					+ (this.c_pitchSecondaryChannelSat * (1 - (this.c_pitchSecondaryChannelSatScale * Math.floor(channel / 9)))) + "%,"
+					+ (this.c_pitchSecondaryChannelLum * (1 - (this.c_pitchSecondaryChannelLumScale * Math.floor(channel / 9)))) + "%)";
+				let newChannelPrimary: string = "hsl(" + ((this.c_pitchPrimaryChannelHue + (channel * this.c_pitchPrimaryChannelHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+					+ (this.c_pitchPrimaryChannelSat * (1 - (this.c_pitchPrimaryChannelSatScale * Math.floor(channel / 9)))) + "%,"
+					+ (this.c_pitchPrimaryChannelLum * (1 - (this.c_pitchPrimaryChannelLumScale * Math.floor(channel / 9)))) + "%)";
+				let newNoteSecondary: string = "hsl(" + ((this.c_pitchSecondaryNoteHue + (channel * this.c_pitchSecondaryNoteHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+					+ (this.c_pitchSecondaryNoteSat * (1 - (this.c_pitchSecondaryNoteSatScale * Math.floor(channel / 9)))) + "%,"
+					+ (this.c_pitchSecondaryNoteLum * (1 - (this.c_pitchSecondaryNoteLumScale * Math.floor(channel / 9)))) + "%)";
+				let newNotePrimary: string = "hsl(" + ((this.c_pitchPrimaryNoteHue + (channel * this.c_pitchPrimaryNoteHueScale / Config.pitchChannelCountMax) * 256) % colorFormulaPitchLimit) + ","
+					+ (this.c_pitchPrimaryNoteSat * (1 - (this.c_pitchPrimaryNoteSatScale * Math.floor(channel / 9)))) + "%,"
+					+ (this.c_pitchPrimaryNoteLum * (1 - (this.c_pitchPrimaryNoteLumScale * Math.floor(channel / 9)))) + "%)";
 
                     let newChannelColors = <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
                     ColorConfig.colorLookup.set(channel, newChannelColors);
@@ -6606,43 +6533,19 @@ export class ColorConfig {
                 }
                 else if (channel < song.pitchChannelCount + song.noiseChannelCount) {
                     // Noise formula
-                    const noiseSecondaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-hue");
-                    const noiseSecondaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-hue-scale");
-                    const noiseSecondaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-sat");
-                    const noiseSecondaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-sat-scale");
-                    const noiseSecondaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-lum");
-                    const noiseSecondaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-lum-scale");
-                    const noisePrimaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-hue");
-                    const noisePrimaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-hue-scale");
-                    const noisePrimaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-sat");
-                    const noisePrimaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-sat-scale");
-                    const noisePrimaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-lum");
-                    const noisePrimaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-lum-scale");
-                    const noiseSecondaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-hue");
-                    const noiseSecondaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-hue-scale");
-                    const noiseSecondaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-sat");
-                    const noiseSecondaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-sat-scale");
-                    const noiseSecondaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-lum");
-                    const noiseSecondaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-lum-scale");
-                    const noisePrimaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-hue");
-                    const noisePrimaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-hue-scale");
-                    const noisePrimaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-sat");
-                    const noisePrimaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-sat-scale");
-                    const noisePrimaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-lum");
-                    const noisePrimaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-lum-scale");
-
-                    let newChannelSecondary: string = "hsl(" + ((+noiseSecondaryChannelHue + (((channel - song.pitchChannelCount) * +noiseSecondaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                        + (+noiseSecondaryChannelSat + channel * +noiseSecondaryChannelSatScale) + "%,"
-                        + (+noiseSecondaryChannelLum + channel * +noiseSecondaryChannelLumScale) + "%)";
-                    let newChannelPrimary: string = "hsl(" + ((+noisePrimaryChannelHue + (((channel - song.pitchChannelCount) * +noisePrimaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                        + (+noisePrimaryChannelSat + channel * +noisePrimaryChannelSatScale) + "%,"
-                        + (+noisePrimaryChannelLum + channel * +noisePrimaryChannelLumScale) + "%)";
-                    let newNoteSecondary: string = "hsl(" + ((+noiseSecondaryNoteHue + (((channel - song.pitchChannelCount) * +noiseSecondaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                        + (+noiseSecondaryNoteSat + channel * +noiseSecondaryNoteSatScale) + "%,"
-                        + (+noiseSecondaryNoteLum + channel * +noiseSecondaryNoteLumScale) + "%)";
-                    let newNotePrimary: string = "hsl(" + ((+noisePrimaryNoteHue + (((channel - song.pitchChannelCount) * +noisePrimaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % 256) + ","
-                        + (+noisePrimaryNoteSat + channel * +noisePrimaryNoteSatScale) + "%,"
-                        + (+noisePrimaryNoteLum + channel * +noisePrimaryNoteLumScale) + "%)";
+					
+				let newChannelSecondary: string = "hsl(" + ((this.c_noiseSecondaryChannelHue + (((channel - song.pitchChannelCount) * this.c_noiseSecondaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+					+ (this.c_noiseSecondaryChannelSat + channel * this.c_noiseSecondaryChannelSatScale) + "%,"
+					+ (this.c_noiseSecondaryChannelLum + channel * this.c_noiseSecondaryChannelLumScale) + "%)";
+				let newChannelPrimary: string = "hsl(" + ((this.c_noisePrimaryChannelHue + (((channel - song.pitchChannelCount) * this.c_noisePrimaryChannelHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+					+ (this.c_noisePrimaryChannelSat + channel * this.c_noisePrimaryChannelSatScale) + "%,"
+					+ (this.c_noisePrimaryChannelLum + channel * this.c_noisePrimaryChannelLumScale) + "%)";
+				let newNoteSecondary: string = "hsl(" + ((this.c_noiseSecondaryNoteHue + (((channel - song.pitchChannelCount) * this.c_noiseSecondaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+					+ (this.c_noiseSecondaryNoteSat + channel * this.c_noiseSecondaryNoteSatScale) + "%,"
+					+ (this.c_noiseSecondaryNoteLum + channel * this.c_noiseSecondaryNoteLumScale) + "%)";
+				let newNotePrimary: string = "hsl(" + ((this.c_noisePrimaryNoteHue + (((channel - song.pitchChannelCount) * this.c_noisePrimaryNoteHueScale) / Config.noiseChannelCountMax) * 256) % colorFormulaNoiseLimit) + ","
+					+ (this.c_noisePrimaryNoteSat + channel * this.c_noisePrimaryNoteSatScale) + "%,"
+					+ (this.c_noisePrimaryNoteLum + channel * this.c_noisePrimaryNoteLumScale) + "%)";
 
                     let newChannelColors = <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
                     ColorConfig.colorLookup.set(channel, newChannelColors);
@@ -6650,43 +6553,19 @@ export class ColorConfig {
                 }
                 else {
                     // Mod formula
-                    const modSecondaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-hue");
-                    const modSecondaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-hue-scale");
-                    const modSecondaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-sat");
-                    const modSecondaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-sat-scale");
-                    const modSecondaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-lum");
-                    const modSecondaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-lum-scale");
-                    const modPrimaryChannelHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-hue");
-                    const modPrimaryChannelHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-hue-scale");
-                    const modPrimaryChannelSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-sat");
-                    const modPrimaryChannelSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-sat-scale");
-                    const modPrimaryChannelLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-lum");
-                    const modPrimaryChannelLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-lum-scale");
-                    const modSecondaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-hue");
-                    const modSecondaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-hue-scale");
-                    const modSecondaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-sat");
-                    const modSecondaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-sat-scale");
-                    const modSecondaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-lum");
-                    const modSecondaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-lum-scale");
-                    const modPrimaryNoteHue: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-hue");
-                    const modPrimaryNoteHueScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-hue-scale");
-                    const modPrimaryNoteSat: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-sat");
-                    const modPrimaryNoteSatScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-sat-scale");
-                    const modPrimaryNoteLum: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-lum");
-                    const modPrimaryNoteLumScale: number = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-lum-scale");
 
-                    let newChannelSecondary: string = "hsl(" + ((+modSecondaryChannelHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * +modSecondaryChannelHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                        + (+modSecondaryChannelSat + channel * +modSecondaryChannelSatScale) + "%,"
-                        + (+modSecondaryChannelLum + channel * +modSecondaryChannelLumScale) + "%)";
-                    let newChannelPrimary: string = "hsl(" + ((+modPrimaryChannelHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * +modPrimaryChannelHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                        + (+modPrimaryChannelSat + channel * +modPrimaryChannelSatScale) + "%,"
-                        + (+modPrimaryChannelLum + channel * +modPrimaryChannelLumScale) + "%)";
-                    let newNoteSecondary: string = "hsl(" + ((+modSecondaryNoteHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * +modSecondaryNoteHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                        + (+modSecondaryNoteSat + channel * +modSecondaryNoteSatScale) + "%,"
-                        + (+modSecondaryNoteLum + channel * +modSecondaryNoteLumScale) + "%)";
-                    let newNotePrimary: string = "hsl(" + ((+modPrimaryNoteHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * +modPrimaryNoteHueScale) / Config.modChannelCountMax) * 256) % 256) + ","
-                        + (+modPrimaryNoteSat + channel * +modPrimaryNoteSatScale) + "%,"
-                        + (+modPrimaryNoteLum + channel * +modPrimaryNoteLumScale) + "%)";
+					let newChannelSecondary: string = "hsl(" + ((this.c_modSecondaryChannelHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * this.c_modSecondaryChannelHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+						+ (this.c_modSecondaryChannelSat + channel * this.c_modSecondaryChannelSatScale) + "%,"
+						+ (this.c_modSecondaryChannelLum + channel * this.c_modSecondaryChannelLumScale) + "%)";
+					let newChannelPrimary: string = "hsl(" + ((this.c_modPrimaryChannelHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * this.c_modPrimaryChannelHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+						+ (this.c_modPrimaryChannelSat + channel * this.c_modPrimaryChannelSatScale) + "%,"
+						+ (this.c_modPrimaryChannelLum + channel * this.c_modPrimaryChannelLumScale) + "%)";
+					let newNoteSecondary: string = "hsl(" + ((this.c_modSecondaryNoteHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * this.c_modSecondaryNoteHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+						+ (this.c_modSecondaryNoteSat + channel * this.c_modSecondaryNoteSatScale) + "%,"
+						+ (this.c_modSecondaryNoteLum + channel * this.c_modSecondaryNoteLumScale) + "%)";
+					let newNotePrimary: string = "hsl(" + ((this.c_modPrimaryNoteHue + (((channel - song.pitchChannelCount - song.noiseChannelCount) * this.c_modPrimaryNoteHueScale) / Config.modChannelCountMax) * 256) % colorFormulaModLimit) + ","
+						+ (this.c_modPrimaryNoteSat + channel * this.c_modPrimaryNoteSatScale) + "%,"
+						+ (this.c_modPrimaryNoteLum + channel * this.c_modPrimaryNoteLumScale) + "%)";
 
                     let newChannelColors = <ChannelColors>{ secondaryChannel: newChannelSecondary, primaryChannel: newChannelPrimary, secondaryNote: newNoteSecondary, primaryNote: newNotePrimary };
                     ColorConfig.colorLookup.set(channel, newChannelColors);
@@ -6709,6 +6588,95 @@ export class ColorConfig {
         }
 
         this.resetColors();
+
+		this.usesColorFormula = (getComputedStyle(this._styleElement).getPropertyValue("--use-color-formula").trim() == "true");
+
+		this.c_invertedText = getComputedStyle(this._styleElement).getPropertyValue("--inverted-text");
+		this.c_trackEditorBgNoiseDim = getComputedStyle(this._styleElement).getPropertyValue("--track-editor-bg-noise-dim");
+		this.c_trackEditorBgNoise = getComputedStyle(this._styleElement).getPropertyValue("--track-editor-bg-noise");
+		this.c_trackEditorBgModDim = getComputedStyle(this._styleElement).getPropertyValue("--track-editor-bg-mod-dim");
+		this.c_trackEditorBgMod = getComputedStyle(this._styleElement).getPropertyValue("--track-editor-bg-mod");
+		this.c_trackEditorBgPitchDim = getComputedStyle(this._styleElement).getPropertyValue("--track-editor-bg-pitch-dim");
+		this.c_trackEditorBgPitch = getComputedStyle(this._styleElement).getPropertyValue("--track-editor-bg-pitch");
+
+		if (this.usesColorFormula) {
+			this.c_pitchSecondaryChannelHue = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-hue");
+			this.c_pitchSecondaryChannelHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-hue-scale");
+			this.c_pitchSecondaryChannelSat = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-sat");
+			this.c_pitchSecondaryChannelSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-sat-scale");
+			this.c_pitchSecondaryChannelLum = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-lum");
+			this.c_pitchSecondaryChannelLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-channel-lum-scale");
+			this.c_pitchPrimaryChannelHue = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-hue");
+			this.c_pitchPrimaryChannelHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-hue-scale");
+			this.c_pitchPrimaryChannelSat = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-sat");
+			this.c_pitchPrimaryChannelSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-sat-scale");
+			this.c_pitchPrimaryChannelLum = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-lum");
+			this.c_pitchPrimaryChannelLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-channel-lum-scale");
+			this.c_pitchSecondaryNoteHue = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-hue");
+			this.c_pitchSecondaryNoteHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-hue-scale");
+			this.c_pitchSecondaryNoteSat = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-sat");
+			this.c_pitchSecondaryNoteSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-sat-scale");
+			this.c_pitchSecondaryNoteLum = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-lum");
+			this.c_pitchSecondaryNoteLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-secondary-note-lum-scale");
+			this.c_pitchPrimaryNoteHue = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-hue");
+			this.c_pitchPrimaryNoteHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-hue-scale");
+			this.c_pitchPrimaryNoteSat = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-sat");
+			this.c_pitchPrimaryNoteSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-sat-scale");
+			this.c_pitchPrimaryNoteLum = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-lum");
+			this.c_pitchPrimaryNoteLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--pitch-primary-note-lum-scale");
+
+			this.c_noiseSecondaryChannelHue = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-hue");
+			this.c_noiseSecondaryChannelHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-hue-scale");
+			this.c_noiseSecondaryChannelSat = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-sat");
+			this.c_noiseSecondaryChannelSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-sat-scale");
+			this.c_noiseSecondaryChannelLum = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-lum");
+			this.c_noiseSecondaryChannelLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-channel-lum-scale");
+			this.c_noisePrimaryChannelHue = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-hue");
+			this.c_noisePrimaryChannelHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-hue-scale");
+			this.c_noisePrimaryChannelSat = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-sat");
+			this.c_noisePrimaryChannelSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-sat-scale");
+			this.c_noisePrimaryChannelLum = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-lum");
+			this.c_noisePrimaryChannelLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-channel-lum-scale");
+			this.c_noiseSecondaryNoteHue = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-hue");
+			this.c_noiseSecondaryNoteHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-hue-scale");
+			this.c_noiseSecondaryNoteSat = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-sat");
+			this.c_noiseSecondaryNoteSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-sat-scale");
+			this.c_noiseSecondaryNoteLum = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-lum");
+			this.c_noiseSecondaryNoteLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-secondary-note-lum-scale");
+			this.c_noisePrimaryNoteHue = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-hue");
+			this.c_noisePrimaryNoteHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-hue-scale");
+			this.c_noisePrimaryNoteSat = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-sat");
+			this.c_noisePrimaryNoteSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-sat-scale");
+			this.c_noisePrimaryNoteLum = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-lum");
+			this.c_noisePrimaryNoteLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--noise-primary-note-lum-scale");
+
+			this.c_modSecondaryChannelHue = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-hue");
+			this.c_modSecondaryChannelHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-hue-scale");
+			this.c_modSecondaryChannelSat = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-sat");
+			this.c_modSecondaryChannelSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-sat-scale");
+			this.c_modSecondaryChannelLum = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-lum");
+			this.c_modSecondaryChannelLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-channel-lum-scale");
+			this.c_modPrimaryChannelHue = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-hue");
+			this.c_modPrimaryChannelHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-hue-scale");
+			this.c_modPrimaryChannelSat = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-sat");
+			this.c_modPrimaryChannelSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-sat-scale");
+			this.c_modPrimaryChannelLum = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-lum");
+			this.c_modPrimaryChannelLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-channel-lum-scale");
+			this.c_modSecondaryNoteHue = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-hue");
+			this.c_modSecondaryNoteHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-hue-scale");
+			this.c_modSecondaryNoteSat = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-sat");
+			this.c_modSecondaryNoteSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-sat-scale");
+			this.c_modSecondaryNoteLum = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-lum");
+			this.c_modSecondaryNoteLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-secondary-note-lum-scale");
+			this.c_modPrimaryNoteHue = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-hue");
+			this.c_modPrimaryNoteHueScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-hue-scale");
+			this.c_modPrimaryNoteSat = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-sat");
+			this.c_modPrimaryNoteSatScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-sat-scale");
+			this.c_modPrimaryNoteLum = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-lum");
+			this.c_modPrimaryNoteLumScale = +getComputedStyle(this._styleElement).getPropertyValue("--mod-primary-note-lum-scale");
+
+        }
+
     }
 
     public static getComputed(name: string): string {

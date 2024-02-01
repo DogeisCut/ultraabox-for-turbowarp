@@ -383,6 +383,25 @@ export class Selection {
             return newNotes;
         }
 	
+        public cutNotes(): void {
+            const group: ChangeGroup = new ChangeGroup();
+            const channelIndex: number = this.boxSelectionChannel;
+            const barIndex: number = this.boxSelectionBar;
+            const cutHeight: number = this.boxSelectionHeight;
+            const cutWidth: number = this.boxSelectionWidth;
+            this.copy();
+            for (let channel = channelIndex; channel < channelIndex + cutHeight; channel++) {
+                for (let bar = barIndex; bar < barIndex + cutWidth; bar++) {
+                    const patternNumber: number = this._doc.song.channels[channel].bars[bar];
+                    if (patternNumber != 0) {
+                        const pattern: Pattern = this._doc.song.channels[channel].patterns[patternNumber - 1];
+                        group.append(new ChangeNoteTruncate(this._doc, pattern, 0, Config.partsPerBeat * this._doc.song.beatsPerBar));
+                    }
+                }
+            }
+            this._doc.record(group);
+        }
+
     // I'm sorry this function is so complicated!
     // Basically I'm trying to avoid accidentally modifying patterns that are used
     // elsewhere in the song (unless we're just pasting a single pattern) but I'm
@@ -844,6 +863,7 @@ export class Selection {
                 const canReplaceLastChange: boolean = this._doc.lastChangeWas(this._changeInstrument);
                 this._changeInstrument = new ChangeGroup();
                 const instruments: number[] = this._doc.recentPatternInstruments[this._doc.channel];
+                this._doc.notifier.changed(); // doc.recentPatternInstruments changes even if a 0 pattern is selected.
                 if (instruments.indexOf(instrument) == -1) {
                     instruments.push(instrument);
                     const maxLayers: number = this._doc.song.getMaxInstrumentsPerPattern(this._doc.channel);
