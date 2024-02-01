@@ -2900,7 +2900,6 @@ export class Song {
         this.patternInstruments = false;
 
         this.title = "Untitled";
-        //document.title = EditorConfig.versionDisplayName;
 
         if (andResetChannels) {
             this.pitchChannelCount = 3;
