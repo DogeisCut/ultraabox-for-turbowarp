@@ -4405,7 +4405,7 @@ export class Song {
                     if (document.URL.substring(document.URL.length - 13).toLowerCase() != "legacysamples") {
                             if (!willLoadLegacySamplesForOldSongs) {
                                 willLoadLegacySamplesForOldSongs = true;
-                                Config.willReloadForCustomSamples = true;
+                                Config.willReloadForCustomSamples = false;
                                 EditorConfig.customSamples = ["legacySamples"];
                                 loadBuiltInSamples(0);
                             }
@@ -5095,7 +5095,7 @@ export class Song {
                         if (document.URL.substring(document.URL.length - 13).toLowerCase() != "legacysamples") {
                             if (!willLoadLegacySamplesForOldSongs) {
                                 willLoadLegacySamplesForOldSongs = true;
-                                Config.willReloadForCustomSamples = true;
+                                Config.willReloadForCustomSamples = false;
                                 EditorConfig.customSamples = ["legacySamples"];
                                 loadBuiltInSamples(0);
                             }
@@ -5779,8 +5779,8 @@ export class Song {
         }
 
         if (Config.willReloadForCustomSamples) {
-            window.location.hash = this.toBase64String();
-            setTimeout(() => { location.reload(); }, 50);
+            //window.location.hash = this.toBase64String();
+            //setTimeout(() => { location.reload(); }, 50);
         }
     }
 
@@ -6035,7 +6035,6 @@ export class Song {
                 settings: customSamplePresetSettings,
             };
             customSamplePresets.push(customSamplePreset);
-            if (!Config.willReloadForCustomSamples) {
                 const rawLoopOptions: any = {
                     "isUsingAdvancedLoopControls": presetIsUsingAdvancedLoopControls,
                     "chipWaveLoopStart": presetChipWaveLoopStart,
@@ -6045,7 +6044,6 @@ export class Song {
                     "chipWaveStartOffset": presetChipWaveStartOffset,
                 };
                 startLoadingSample(urlSliced, chipWaveIndex, customSamplePresetSettings, rawLoopOptions, customSampleRate);
-            }
             sampleLoadingState.statusTable[chipWaveIndex] = SampleLoadingStatus.loading;
             sampleLoadingState.urlTable[chipWaveIndex] = urlSliced;
             sampleLoadingState.totalSamples++;
@@ -6187,7 +6185,7 @@ export class Song {
                 // early here, because Instrument.fromJsonObject depends on the
                 // chip wave list having the correct items already in memory.
 
-                Config.willReloadForCustomSamples = true;
+                Config.willReloadForCustomSamples = false;
 
                 Song._restoreChipWaveListToDefault();
 
@@ -6473,7 +6471,7 @@ export class Song {
                 }
             }
             if (shouldLoadLegacySamples) {
-                Config.willReloadForCustomSamples = true;
+                Config.willReloadForCustomSamples = false;
 
                 Song._restoreChipWaveListToDefault();
 
@@ -6485,7 +6483,7 @@ export class Song {
                 if (EditorConfig.customSamples != null && EditorConfig.customSamples.length > 0) {
                     // We need to reload anyway in this case, because (for now)
                     // the chip wave lists won't be correctly updated.
-                    Config.willReloadForCustomSamples = true;
+                    Config.willReloadForCustomSamples = false;
                     Song._clearSamples();
                 }
             }
@@ -6736,9 +6734,10 @@ export class Song {
         Array.prototype.push.apply(this.channels, newModChannels);
 
         if (Config.willReloadForCustomSamples) {
-            window.location.hash = this.toBase64String();
+            // window.location.hash = this.toBase64String();
             // The prompt seems to get stuck if reloading is done too quickly.
-            setTimeout(() => { location.reload(); }, 50);
+            // turning this off for now cause something seems to happen
+            // setTimeout(() => { location.reload(); }, 50);
         }
     }
 
