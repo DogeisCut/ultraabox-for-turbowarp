@@ -11930,7 +11930,7 @@ export class Synth {
         const voiceCount: number = instrumentState.unisonVoices;
         let pickedStringFunction: Function = Synth.pickedStringFunctionCache[voiceCount];
         if (pickedStringFunction == undefined) {
-            let pickedStringSource: string = "return (synth, bufferIndex, runLength, tone, instrumentState) => {return (synth, bufferIndex, runLength, tone, instrumentState) => {";
+            let pickedStringSource: string = "return (synth, bufferIndex, runLength, tone, instrumentState) => {";
 
 
             pickedStringSource += `
@@ -12054,7 +12054,6 @@ export class Synth {
 				synth.sanitizeFilters(filters);
 				tone.initialNoteFilterInput1 = initialFilterInput1;
 				tone.initialNoteFilterInput2 = initialFilterInput2;
-			}
             }`
 
             // Duplicate lines containing "#" for each voice and replace the "#" with the voice index.
