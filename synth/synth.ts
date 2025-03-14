@@ -535,7 +535,9 @@ export class Pattern {
         return patternObject;
     }
 
-    public fromJsonObject(patternObject: any, song: Song, channel: Channel, importedPartsPerBeat: number, isNoiseChannel: boolean, isModChannel: boolean): void {
+    public fromJsonObject(patternObject: any, song: Song, channel: Channel, importedPartsPerBeat: number, isNoiseChannel: boolean, isModChannel: boolean, jsonFormat: string = "auto"): void {
+        const format: string = jsonFormat.toLowerCase();
+
         if (song.patternInstruments) {
             if (Array.isArray(patternObject["instruments"])) {
                 const instruments: any[] = patternObject["instruments"];
@@ -577,15 +579,16 @@ export class Pattern {
 
                 //let noteClock: number = tickClock;
                 let startInterval: number = 0;
+
+                let instrument: Instrument = channel.instruments[this.instruments[0]];
+                let mod: number = Math.max(0, Config.modCount - note.pitches[0] - 1);
+
                 for (let k: number = 0; k < noteObject["points"].length; k++) {
                     const pointObject: any = noteObject["points"][k];
                     if (pointObject == undefined || pointObject["tick"] == undefined) continue;
                     const interval: number = (pointObject["pitchBend"] == undefined) ? 0 : (pointObject["pitchBend"] | 0);
 
                     const time: number = Math.round((+pointObject["tick"]) * Config.partsPerBeat / importedPartsPerBeat);
-
-                    let instrument: Instrument = channel.instruments[this.instruments[0]];
-                    let mod: number = Math.max(0, Config.modCount - note.pitches[0] - 1);
 
                     // Only one instrument per pattern allowed in mod channels.
                     let volumeCap: number = song.getVolumeCapForSetting(isModChannel, instrument.modulators[mod], instrument.modFilterTypes[mod]);
@@ -651,6 +654,15 @@ export class Pattern {
                     note.continuesLastPattern = (noteObject["continuesLastPattern"] === true);
                 } else {
                     note.continuesLastPattern = false;
+                }
+
+                if (format != "ultrabox" && instrument.modulators[mod] == Config.modulators.dictionary["tempo"].index) {
+                    for (const pin of note.pins) {
+                        const oldMin: number = 30;
+                        const newMin: number = 1;
+                        const old: number = pin.size + oldMin;
+                        pin.size = old - newMin; // convertRealFactor will add back newMin as necessary
+                    }
                 }
 
                 this.notes.push(note);
@@ -1408,7 +1420,7 @@ export class Instrument {
     public chord: number = 1;
     public volume: number = 0;
     public pan: number = Config.panCenter;
-    public panDelay: number = 10;
+    public panDelay: number = 0;
     public arpeggioSpeed: number = 12;
     public fastTwoNoteArp: boolean = false;
     public legacyTieOver: boolean = false;
@@ -1535,7 +1547,7 @@ export class Instrument {
         this.bitcrusherFreq = Math.floor((Config.bitcrusherFreqRange - 1) * 0.5)
         this.bitcrusherQuantization = Math.floor((Config.bitcrusherQuantizationRange - 1) * 0.5);
         this.pan = Config.panCenter;
-        this.panDelay = 10;
+        this.panDelay = 0;
         this.pitchShift = Config.pitchShiftCenter;
         this.detune = Config.detuneCenter;
         this.vibrato = 0;
@@ -2252,7 +2264,7 @@ export class Instrument {
             this.pan = clamp(0, Config.panMax + 1, Math.round(Config.panCenter + (instrumentObject["pan"] | 0) * Config.panCenter / 100));
         } else if (instrumentObject["ipan"] != undefined) {
             // support for modbox fixed
-            this.pan = clamp(0, Config.panMax + 1, Config.panCenter + (instrumentObject["ipan"] * 100));
+            this.pan = clamp(0, Config.panMax + 1, Config.panCenter + (instrumentObject["ipan"] * -50));
         } else {
             this.pan = Config.panCenter;
         }
@@ -2265,7 +2277,7 @@ export class Instrument {
         if (instrumentObject["panDelay"] != undefined) {
             this.panDelay = (instrumentObject["panDelay"] | 0);
         } else {
-            this.panDelay = 10;
+            this.panDelay = 0;
         }
 
         if (instrumentObject["detune"] != undefined) {
@@ -2516,6 +2528,8 @@ export class Instrument {
                         if (operatorObject["waveform"] == "square") {
                             operator.waveform = Config.operatorWaves.dictionary["pulse width"].index;
                             operator.pulseWidth = 5;
+                        } else if (operatorObject["waveform"] == "rounded") {
+                            operator.waveform = Config.operatorWaves.dictionary["quasi-sine"].index;
                         } else {
                             operator.waveform = 0;
                         }
@@ -3008,7 +3022,7 @@ export class Song {
         this.beatsPerBar = 8;
         this.barCount = 16;
         this.patternsPerChannel = 8;
-        this.rhythm = 3;
+        this.rhythm = 1;
         this.layeredInstruments = false;
         this.patternInstruments = false;
 
@@ -3923,7 +3937,7 @@ export class Song {
                 }
             } break;
             case SongTagCode.scale: {
-                this.scale = base64CharCodeToInt[compressed.charCodeAt(charIndex++)];
+                this.scale = clamp(0, Config.scales.length, base64CharCodeToInt[compressed.charCodeAt(charIndex++)]);
                 // All the scales were jumbled around by Jummbox. Just convert to free.
                 if (this.scale == Config.scales["dictionary"]["Custom"].index) {
                     for (var i = 1; i < Config.pitchesPerOctave; i++) {
@@ -4069,25 +4083,22 @@ export class Song {
             } break;
             case SongTagCode.rhythm: {
                 if (!fromUltraBox) {
-			let newRhythm = base64CharCodeToInt[compressed.charCodeAt(charIndex++)];	
-			this.rhythm = clamp(0, Config.rhythms.length, newRhythm + 2);
-			if (fromJummBox && beforeThree || fromBeepBox) {
-				if (this.rhythm == Config.rhythms.dictionary["÷3 (triplets)"].index || this.rhythm == Config.rhythms.dictionary["÷6 (sextuplets)"].index) {
-					useSlowerArpSpeed = true;
-				}
-				if (this.rhythm >= Config.rhythms.dictionary["÷6 (sextuplets)"].index) {
-					// @TODO: This assumes that 6 and 8 are in that order, but
-					// if someone reorders Config.rhythms that may not be true,
-					// so this check probably should instead look for those
-					// specific rhythms.
-					useFastTwoNoteArp = true;
-				}
-			}
-			
-		} else {
-			this.rhythm = base64CharCodeToInt[compressed.charCodeAt(charIndex++)];
-		}
-		//rhythm fixes
+                    this.rhythm = clamp(0, Config.rhythms.length, base64CharCodeToInt[compressed.charCodeAt(charIndex++)]);
+                    if (fromJummBox && beforeThree || fromBeepBox) {
+                        if (this.rhythm == Config.rhythms.dictionary["÷3 (triplets)"].index || this.rhythm == Config.rhythms.dictionary["÷6"].index) {
+                            useSlowerArpSpeed = true;
+                        }
+                        if (this.rhythm >= Config.rhythms.dictionary["÷6"].index) {
+                            // @TODO: This assumes that 6 and 8 are in that order, but
+                            // if someone reorders Config.rhythms that may not be true,
+                            // so this check probably should instead look for those
+                            // specific rhythms.
+                            useFastTwoNoteArp = true;
+                        }
+                    }     
+                } else {
+                    this.rhythm = clamp(0, Config.rhythms.length, base64CharCodeToInt[compressed.charCodeAt(charIndex++)]);
+                }
             } break;
             case SongTagCode.channelOctave: {
                 if (beforeThree && fromBeepBox) {
@@ -5380,6 +5391,10 @@ export class Song {
                 let songReverbInstrument: number = -1;
                 let songReverbIndex: number = -1;
 
+                // @TODO: Include GoldBox here.
+                const shouldCorrectTempoMods: boolean = fromJummBox;
+                const jummboxTempoMin: number = 30;
+
                 while (true) {
                     const channel: Channel = this.channels[channelIndex];
                     const isNoiseChannel: boolean = this.getChannelIsNoise(channelIndex);
@@ -5669,7 +5684,13 @@ export class Song {
                                 }
                                 note.pitches.length = pitchCount;
                                 pitchBends.unshift(note.pitches[0]); // TODO: Use Deque?
+                                const noteIsForTempoMod: boolean = isModChannel && channel.instruments[newPattern.instruments[0]].modulators[Config.modCount - 1 - note.pitches[0]] === Config.modulators.dictionary["tempo"].index;
+                                let tempoOffset: number = 0;
+                                if (shouldCorrectTempoMods && noteIsForTempoMod) {
+                                    tempoOffset = jummboxTempoMin - Config.tempoMin; // convertRealFactor will add back Config.tempoMin as necessary
+                                }
                                 if (isModChannel) {
+                                    note.pins[0].size += tempoOffset;
                                     note.pins[0].size *= detuneScaleNotes[newPattern.instruments[0]][note.pitches[0]];
                                 }
                                 let pinCount: number = 1;
@@ -5679,7 +5700,7 @@ export class Song {
                                     const interval: number = pitchBends[0] - note.pitches[0];
                                     if (note.pins.length <= pinCount) {
                                         if (isModChannel) {
-                                            note.pins[pinCount++] = makeNotePin(interval, pinObj.time, pinObj.size * detuneScaleNotes[newPattern.instruments[0]][note.pitches[0]]);
+                                            note.pins[pinCount++] = makeNotePin(interval, pinObj.time, pinObj.size * detuneScaleNotes[newPattern.instruments[0]][note.pitches[0]] + tempoOffset);
                                         } else {
                                             note.pins[pinCount++] = makeNotePin(interval, pinObj.time, pinObj.size);
                                         }
@@ -5688,7 +5709,7 @@ export class Song {
                                         pin.interval = interval;
                                         pin.time = pinObj.time;
                                         if (isModChannel) {
-                                            pin.size = pinObj.size * detuneScaleNotes[newPattern.instruments[0]][note.pitches[0]];
+                                            pin.size = pinObj.size * detuneScaleNotes[newPattern.instruments[0]][note.pitches[0]] + tempoOffset;
                                         } else {
                                             pin.size = pinObj.size;
                                         }
@@ -6711,7 +6732,7 @@ export class Song {
                     if (channelObject["patterns"]) patternObject = channelObject["patterns"][i];
                     if (patternObject == undefined) continue;
 
-                    pattern.fromJsonObject(patternObject, this, channel, importedPartsPerBeat, isNoiseChannel, isModChannel);
+                    pattern.fromJsonObject(patternObject, this, channel, importedPartsPerBeat, isNoiseChannel, isModChannel, format);
                 }
                 channel.patterns.length = this.patternsPerChannel;
 
@@ -9145,7 +9166,7 @@ export class Synth {
 
             if (this.oscEnabled) {
                 if (this.oscRefreshEventTimer <= 0) {
-                    events.raise("oscillascopeUpdate", outputDataL, outputDataR);
+                    events.raise("oscilloscopeUpdate", outputDataL, outputDataR);
                     this.oscRefreshEventTimer = 2;
                 } else {
                     this.oscRefreshEventTimer--;
